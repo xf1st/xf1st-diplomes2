@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вход в систему - Академический сервис</title>
+    <title>ЧаВо и Процесс Работы - Академический сервис</title>
+    <link rel="shortcut icon" href="assets/logo/logo.png" type="image/x-icon">
+    <link rel="icon" href="assets/logo/logo.png" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
     <script>tailwind.config = { theme: { extend: { colors: { primary: '#00236a', secondary: '#002f8f' }, borderRadius: { 'none': '0px', 'sm': '0px', DEFAULT: '0px', 'md': '0px', 'lg': '0px', 'xl': '0px', '2xl': '0px', '3xl': '0px', 'full': '0px', 'button': '0px' } } } }</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -91,11 +93,27 @@
         .custom-checkbox input:checked~.checkmark:after {
             display: block;
         }
+
+        /* Styles for FAQ Accordion */
+        .faq-item .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 500px; /* Adjust as needed */
+            transition: max-height 0.4s ease-in;
+        }
+        .faq-item .faq-toggle-icon {
+            transition: transform 0.3s ease;
+        }
+        .faq-item.open .faq-toggle-icon {
+            transform: rotate(45deg);
+        }
     </style>
 </head>
 
 <body class="bg-[#f9f7f4]">
-    <!-- Шапка сайта -->
     <header class="bg-primary text-white">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center" data-aos="fade-right">
@@ -104,81 +122,194 @@
                 </div>
                 <a href="index.html"><span class="text-2xl font-bold">xf1st</span></a>
             </div>
-            <a href="index.html"
-                data-aos="fade-left"
-                class="flex items-center text-white hover:text-gray-300 transition">
-                <i class="ri-arrow-left-line mr-1"></i>
-                <span>Вернуться на главную</span>
-            </a>
+            <nav class="hidden md:flex space-x-6" data-aos="fade-down" data-aos-delay="100">
+                <a href="index.html" class="hover:text-gray-300">Главная страница</a>
+                <a href="index.html#services" class="hover:text-gray-300">Услуги</a>
+                <a href="about.html" class="hover:text-gray-300">О нас</a>
+                <a href="contact.html" class="hover:text-gray-300">Контакты</a>
+            </nav>
+            <div class="flex items-center" data-aos="fade-left" data-aos-delay="200">
+                <a href="contact.html"
+                    class="px-4 py-2 text-primary bg-white rounded-button whitespace-nowrap hover:bg-gray-100 transition">Связаться</a>
+            </div>
         </div>
     </header>
 
-    <!-- Основной контент -->
-    <main class="min-h-[calc(100vh-130px)] flex items-center justify-center py-12 px-4">
-        <div class="w-full max-w-md bg-white shadow-sm p-8 md:p-10" data-aos="fade-up">
-            <div class="text-center mb-8">
-                <h1 class="text-2xl md:text-3xl font-bold text-primary">Вход</h1>
-                <p class="text-gray-600 mt-2 font-light">Войдите в свой аккаунт для доступа к сервису</p>
+    <main>
+        <section class="bg-primary text-white py-20">
+            <div class="container mx-auto px-4" data-aos="fade-up">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Вопросы и ответы</h1>
+                <p class="text-lg font-light max-w-3xl">Здесь вы найдете ответы на популярные вопросы, а также информацию о процессе работы и наших гарантиях.</p>
             </div>
+        </section>
 
-            <form class="space-y-6">
-                <!-- Email поле -->
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
-                            <i class="ri-mail-line"></i>
-                        </div>
-                        <input type="email" id="email" name="email"
-                            class="form-input w-full pl-10 py-2.5 border border-gray-300 focus:outline-none text-sm"
-                            placeholder="your.email@example.com">
-                    </div>
-                </div>
-
-                <!-- Пароль поле -->
-                <div>
-                    <div class="flex items-center justify-between mb-1">
-                        <label for="password" class="block text-sm font-medium text-gray-700">Пароль</label>
-                        <a href="#" class="text-sm text-primary hover:underline">Забыли пароль?</a>
-                    </div>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
-                             <i class="ri-lock-line"></i>
-                        </div>
-                        <input type="password" id="password" name="password"
-                            class="form-input w-full pl-10 py-2.5 border border-gray-300 focus:outline-none text-sm"
-                            placeholder="••••••••">
-                        <div class="password-toggle">
-                            <i class="ri-eye-line" id="togglePassword"></i>
+        <section id="faq" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-primary mb-12 text-center" data-aos="fade-up">Часто задаваемые вопросы</h2>
+                <div class="max-w-3xl mx-auto space-y-4">
+                    <div class="faq-item border border-gray-200 rounded-md overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                        <button class="faq-question w-full flex justify-between items-center text-left p-4 bg-gray-50 hover:bg-gray-100 focus:outline-none">
+                            <span class="font-medium text-primary">Как узнать стоимость работы?</span>
+                            <i class="ri-add-line faq-toggle-icon text-primary text-xl"></i>
+                        </button>
+                        <div class="faq-answer p-4 border-t border-gray-200">
+                            <p class="text-gray-600 font-light">Стоимость каждой работы рассчитывается индивидуально, так как зависит от множества факторов: типа работы (диплом, курсовая), темы, сложности, требуемого объема, сроков выполнения и специфических требований вашего ВУЗа. Для точного расчета, пожалуйста, <a href="contact.html" class="text-primary underline">заполните форму</a> на странице контактов или свяжитесь с нами напрямую, предоставив как можно больше деталей.</p>
                         </div>
                     </div>
+
+                    <div class="faq-item border border-gray-200 rounded-md overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                        <button class="faq-question w-full flex justify-between items-center text-left p-4 bg-gray-50 hover:bg-gray-100 focus:outline-none">
+                            <span class="font-medium text-primary">Какие сроки выполнения работ?</span>
+                            <i class="ri-add-line faq-toggle-icon text-primary text-xl"></i>
+                        </button>
+                        <div class="faq-answer p-4 border-t border-gray-200">
+                            <p class="text-gray-600 font-light">Стандартные сроки зависят от типа работы: для курсовых это обычно 7-14 дней, для дипломных работ — 20-30 дней. Мы всегда стараемся учитывать ваши дедлайны. Возможно также срочное выполнение заказа за дополнительную плату, но это обсуждается индивидуально в зависимости от загруженности наших авторов и сложности задачи.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item border border-gray-200 rounded-md overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                        <button class="faq-question w-full flex justify-between items-center text-left p-4 bg-gray-50 hover:bg-gray-100 focus:outline-none">
+                            <span class="font-medium text-primary">Как проверяется уникальность работы?</span>
+                            <i class="ri-add-line faq-toggle-icon text-primary text-xl"></i>
+                        </button>
+                        <div class="faq-answer p-4 border-t border-gray-200">
+                            <p class="text-gray-600 font-light">Мы гарантируем высокую уникальность всех наших работ. Каждая работа проходит обязательную проверку через системы обнаружения плагиата (например, Antiplagiat.ВУЗ или другие по вашему требованию). Мы предоставляем отчет о проверке вместе с готовой работой. Минимальный порог оригинальности обычно составляет 75-85%, но мы ориентируемся на требования вашего учебного заведения.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item border border-gray-200 rounded-md overflow-hidden" data-aos="fade-up" data-aos-delay="400">
+                        <button class="faq-question w-full flex justify-between items-center text-left p-4 bg-gray-50 hover:bg-gray-100 focus:outline-none">
+                            <span class="font-medium text-primary">Как происходит оплата?</span>
+                            <i class="ri-add-line faq-toggle-icon text-primary text-xl"></i>
+                        </button>
+                        <div class="faq-answer p-4 border-t border-gray-200">
+                            <p class="text-gray-600 font-light">Работа над заказом начинается после внесения предоплаты, обычно в размере 50% от общей стоимости. Оставшаяся часть оплачивается после того, как работа будет готова и вы получите уведомление (например, часть работы для ознакомления). Мы принимаем различные способы оплаты, включая банковские карты и электронные кошельки. Детали будут обсуждаться с менеджером при оформлении заказа.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item border border-gray-200 rounded-md overflow-hidden" data-aos="fade-up" data-aos-delay="500">
+                        <button class="faq-question w-full flex justify-between items-center text-left p-4 bg-gray-50 hover:bg-gray-100 focus:outline-none">
+                            <span class="font-medium text-primary">Что если потребуются доработки?</span>
+                            <i class="ri-add-line faq-toggle-icon text-primary text-xl"></i>
+                        </button>
+                        <div class="faq-answer p-4 border-t border-gray-200">
+                            <p class="text-gray-600 font-light">Мы предоставляем гарантийный период (обычно 30 дней после сдачи работы), в течение которого все доработки по изначальным требованиям технического задания вносятся бесплатно. Если ваш научный руководитель внес замечания или потребовались корректировки, просто сообщите нам, и автор внесет необходимые правки в кратчайшие сроки.</p>
+                        </div>
+                    </div>
+
                 </div>
-
-                <!-- Запомнить меня -->
-                <div class="flex items-center">
-                    <label class="custom-checkbox flex items-center">
-                        <input type="checkbox" id="remember" name="remember">
-                        <span class="checkmark mr-2"></span>
-                        <span class="text-sm text-gray-700 font-light">Запомнить меня</span>
-                    </label>
-                </div>
-
-                <!-- Кнопка входа -->
-                <button type="submit"
-                    class="w-full bg-primary text-white py-2.5 rounded-button font-medium hover:bg-primary/90 transition whitespace-nowrap text-sm">
-                    Войти
-                </button>
-            </form>
-
-            <!-- Регистрация -->
-            <div class="mt-8 pt-6 border-t border-gray-200 text-center">
-                <p class="text-gray-600 font-light text-sm">Нет аккаунта? <a href="#"
-                        class="text-primary font-medium hover:underline">Зарегистрироваться</a></p>
             </div>
-        </div>
+        </section>
+
+        <section class="py-16 bg-[#f9f7f4]">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-primary mb-12 text-center" data-aos="fade-up">Процесс заказа</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
+                             <i class="ri-chat-1-line ri-2x text-primary"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-primary mb-2">1. Заявка и Обсуждение</h3>
+                        <p class="text-gray-600 font-light text-sm">Вы оставляете заявку через сайт или связываетесь с нами. Мы уточняем все детали: тему, требования, сроки, объем.</p>
+                    </div>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
+                            <i class="ri-user-search-line ri-2x text-primary"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-primary mb-2">2. Подбор автора и Оплата</h3>
+                        <p class="text-gray-600 font-light text-sm">Мы подбираем профильного специалиста. После согласования стоимости вы вносите предоплату.</p>
+                    </div>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                        <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
+                            <i class="ri-draft-line ri-2x text-primary"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-primary mb-2">3. Написание работы</h3>
+                        <p class="text-gray-600 font-light text-sm">Автор выполняет работу согласно требованиям, при необходимости вы можете получать промежуточные результаты.</p>
+                    </div>
+                    <div class="text-center" data-aos="fade-up" data-aos-delay="400">
+                        <div class="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
+                           <i class="ri-check-double-line ri-2x text-primary"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-primary mb-2">4. Проверка и Сдача</h3>
+                        <p class="text-gray-600 font-light text-sm">Готовая работа проверяется на качество и уникальность. Вы получаете финальную версию после полной оплаты.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-white">
+             <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-primary mb-12 text-center" data-aos="fade-up">Наши гарантии</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex-shrink-0 flex items-center justify-center mt-1">
+                            <i class="ri-shield-check-line ri-xl text-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-primary mb-1">Уникальность</h3>
+                            <p class="text-gray-600 font-light text-sm">Гарантируем проверку на плагиат и соответствие требованиям вашего ВУЗа.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex-shrink-0 flex items-center justify-center mt-1">
+                           <i class="ri-time-line ri-xl text-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-primary mb-1">Соблюдение сроков</h3>
+                            <p class="text-gray-600 font-light text-sm">Мы строго придерживаемся оговоренных дедлайнов.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="300">
+                         <div class="w-12 h-12 bg-primary/10 rounded-full flex-shrink-0 flex items-center justify-center mt-1">
+                            <i class="ri-lock-line ri-xl text-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-primary mb-1">Конфиденциальность</h3>
+                            <p class="text-gray-600 font-light text-sm">Ваши личные данные и информация о заказе надежно защищены.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="400">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex-shrink-0 flex items-center justify-center mt-1">
+                           <i class="ri-edit-line ri-xl text-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-primary mb-1">Бесплатные доработки</h3>
+                            <p class="text-gray-600 font-light text-sm">Вносим правки согласно исходным требованиям в течение гарантийного периода.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="500">
+                         <div class="w-12 h-12 bg-primary/10 rounded-full flex-shrink-0 flex items-center justify-center mt-1">
+                           <i class="ri-thumb-up-line ri-xl text-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-primary mb-1">Качество</h3>
+                            <p class="text-gray-600 font-light text-sm">Работы выполняются опытными авторами с соблюдением всех стандартов.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4" data-aos="fade-up" data-aos-delay="600">
+                        <div class="w-12 h-12 bg-primary/10 rounded-full flex-shrink-0 flex items-center justify-center mt-1">
+                           <i class="ri-customer-service-2-line ri-xl text-primary"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-primary mb-1">Поддержка</h3>
+                            <p class="text-gray-600 font-light text-sm">Наши менеджеры всегда на связи, чтобы ответить на ваши вопросы.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-[#f9f7f4]">
+            <div class="container mx-auto px-4 text-center" data-aos="fade-up">
+                <h2 class="text-2xl font-semibold text-primary mb-4">Остались вопросы?</h2>
+                <p class="text-gray-600 mb-6 max-w-xl mx-auto font-light">Если вы не нашли ответ на свой вопрос или хотите обсудить детали вашего заказа, свяжитесь с нами!</p>
+                <a href="contact.html"
+                   class="inline-block bg-primary text-white px-8 py-3 rounded-button hover:bg-primary/90 transition whitespace-nowrap font-medium">Связаться с нами</a>
+            </div>
+        </section>
+
     </main>
 
-    <!-- Подвал -->
     <footer class="bg-white py-20">
         <div class="container mx-auto px-4">
             <div class="grid md:grid-cols-3 gap-10">
@@ -206,18 +337,25 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const togglePassword = document.getElementById('togglePassword');
-            const passwordField = document.getElementById('password');
+            const faqItems = document.querySelectorAll('.faq-item');
 
-            if (togglePassword && passwordField) {
-                togglePassword.addEventListener('click', function () {
-                    const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-                    passwordField.setAttribute('type', type);
+            faqItems.forEach(item => {
+                const questionButton = item.querySelector('.faq-question');
+                const answerDiv = item.querySelector('.faq-answer');
+                const icon = item.querySelector('.faq-toggle-icon');
 
-                    this.classList.toggle('ri-eye-line');
-                    this.classList.toggle('ri-eye-off-line');
-                });
-            }
+                if (questionButton) {
+                    questionButton.addEventListener('click', () => {
+                        const isOpen = item.classList.contains('open');
+
+                        item.classList.toggle('open');
+                        if (icon) { 
+                            icon.classList.toggle('ri-add-line');
+                            icon.classList.toggle('ri-subtract-line');
+                        }
+                    });
+                }
+            });
         });
     </script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
