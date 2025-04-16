@@ -45,7 +45,7 @@
 </head>
 
 <body class="bg-[#f9f7f4]">
-    <header class="bg-primary text-white">
+    <header class="bg-primary text-white relative">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center" data-aos="fade-right">
                 <div class="w-10 h-10 flex items-center justify-center mr-2">
@@ -61,8 +61,20 @@
             <div class="flex items-center" data-aos="fade-left" data-aos-delay="200">
                 <a href="auth.html"
                     data-readdy="true"
-                    class="px-4 py-2 text-primary bg-white rounded-button whitespace-nowrap hover:bg-gray-100 transition">FAQ</a>
+                    class="px-4 py-2 text-primary bg-white rounded-button whitespace-nowrap hover:bg-gray-100 transition hidden md:block">FAQ</a>
+                <button id="mobile-menu-button" aria-label="Открыть меню" class="md:hidden text-white focus:outline-none ml-4">
+                    <i class="ri-menu-line ri-xl"></i>
+                </button>
             </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden absolute top-full left-0 w-full bg-primary/95 backdrop-blur-sm z-50 shadow-lg">
+            <nav class="flex flex-col p-4 space-y-3">
+                <a href="index.html" class="text-white hover:bg-white/10 p-2 rounded-md">Главная страница</a>
+                <a href="index.html#services" class="text-white hover:bg-white/10 p-2 rounded-md">Услуги</a>
+                <a href="about.html" class="text-white bg-white/10 p-2 rounded-md font-medium">О нас</a>
+                <a href="contact.html" class="text-white hover:bg-white/10 p-2 rounded-md">Контакты</a>
+                <a href="auth.html" class="text-white hover:bg-white/10 p-2 rounded-md">FAQ</a>
+            </nav>
         </div>
     </header>
     <main>
@@ -520,6 +532,35 @@
       AOS.init({
         duration: 800,
         once: true
+      });
+
+      document.addEventListener('DOMContentLoaded', function () {
+          const menuButton = document.getElementById('mobile-menu-button');
+          const mobileMenu = document.getElementById('mobile-menu');
+          const menuIcon = menuButton ? menuButton.querySelector('i') : null;
+
+          if (menuButton && mobileMenu && menuIcon) {
+              menuButton.addEventListener('click', () => {
+                  const isHidden = mobileMenu.classList.toggle('hidden');
+                  
+                  if (!isHidden) {
+                      menuIcon.classList.remove('ri-menu-line');
+                      menuIcon.classList.add('ri-close-line');
+                  } else {
+                      menuIcon.classList.remove('ri-close-line');
+                      menuIcon.classList.add('ri-menu-line');
+                  }
+              });
+
+              const mobileLinks = mobileMenu.querySelectorAll('a');
+              mobileLinks.forEach(link => {
+                  link.addEventListener('click', () => {
+                      mobileMenu.classList.add('hidden'); 
+                      menuIcon.classList.remove('ri-close-line');
+                      menuIcon.classList.add('ri-menu-line');
+                  });
+              });
+          }
       });
     </script>
 </body>
