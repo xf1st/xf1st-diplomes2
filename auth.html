@@ -12,7 +12,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         :where([class^="ri-"])::before {
             content: "\f3c2";
         }
@@ -23,8 +28,9 @@
         }
 
         .form-input:focus {
-            border-color: #002f8f;
-            box-shadow: 0 0 0 1px #002f8f;
+            border-color: #00236a;
+            box-shadow: 0 0 0 1px #00236a;
+            outline: none;
         }
 
         .password-toggle {
@@ -33,6 +39,10 @@
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
+            color: #9ca3af;
+        }
+        .password-toggle:hover {
+            color: #6b7280;
         }
 
         .custom-checkbox {
@@ -57,11 +67,12 @@
             border: 1px solid #d1d5db;
             display: inline-block;
             position: relative;
+            transition: background-color 0.2s, border-color 0.2s;
         }
 
         .custom-checkbox input:checked~.checkmark {
-            background-color: #002f8f;
-            border-color: #002f8f;
+            background-color: #00236a;
+            border-color: #00236a;
         }
 
         .checkmark:after {
@@ -83,32 +94,31 @@
     </style>
 </head>
 
-<body>
+<body class="bg-[#f9f7f4]">
     <!-- Шапка сайта -->
     <header class="bg-primary text-white">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center">
+            <div class="flex items-center" data-aos="fade-right">
                 <div class="w-10 h-10 flex items-center justify-center mr-2">
                     <i class="ri-book-open-line ri-2x"></i>
                 </div>
-                <span class="font-['Pacifico'] text-2xl">logo</span>
+                <a href="index.html"><span class="text-2xl font-bold">xf1st</span></a>
             </div>
-            <a href="https://readdy.ai/home/00ee976a-50fc-455a-b894-665422534c3b/651b61cf-42c9-4e7f-8f8d-42ff810f242b"
-                data-readdy="true" class="flex items-center text-white hover:text-gray-200">
-                <div class="w-5 h-5 flex items-center justify-center mr-1">
-                    <i class="ri-arrow-left-line"></i>
-                </div>
+            <a href="index.html"
+                data-aos="fade-left"
+                class="flex items-center text-white hover:text-gray-300 transition">
+                <i class="ri-arrow-left-line mr-1"></i>
                 <span>Вернуться на главную</span>
             </a>
         </div>
     </header>
 
     <!-- Основной контент -->
-    <main class="min-h-screen flex items-center justify-center py-12 px-4">
-        <div class="w-full max-w-md bg-white shadow-lg p-8 md:p-10">
+    <main class="min-h-[calc(100vh-130px)] flex items-center justify-center py-12 px-4">
+        <div class="w-full max-w-md bg-white shadow-sm p-8 md:p-10" data-aos="fade-up">
             <div class="text-center mb-8">
-                <h1 class="text-2xl md:text-3xl font-bold text-gray-900">Вход в систему</h1>
-                <p class="text-gray-600 mt-2">Введите данные для входа в личный кабинет</p>
+                <h1 class="text-2xl md:text-3xl font-bold text-primary">Вход</h1>
+                <p class="text-gray-600 mt-2 font-light">Войдите в свой аккаунт для доступа к сервису</p>
             </div>
 
             <form class="space-y-6">
@@ -116,14 +126,12 @@
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
                     <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <div class="w-5 h-5 flex items-center justify-center text-gray-400">
-                                <i class="ri-mail-line"></i>
-                            </div>
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                            <i class="ri-mail-line"></i>
                         </div>
                         <input type="email" id="email" name="email"
-                            class="form-input w-full pl-10 py-3 border border-gray-300 focus:outline-none"
-                            placeholder="Введите ваш email">
+                            class="form-input w-full pl-10 py-2.5 border border-gray-300 focus:outline-none text-sm"
+                            placeholder="your.email@example.com">
                     </div>
                 </div>
 
@@ -134,15 +142,13 @@
                         <a href="#" class="text-sm text-primary hover:underline">Забыли пароль?</a>
                     </div>
                     <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <div class="w-5 h-5 flex items-center justify-center text-gray-400">
-                                <i class="ri-lock-line"></i>
-                            </div>
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                             <i class="ri-lock-line"></i>
                         </div>
                         <input type="password" id="password" name="password"
-                            class="form-input w-full pl-10 py-3 border border-gray-300 focus:outline-none"
-                            placeholder="Введите ваш пароль">
-                        <div class="password-toggle w-5 h-5 flex items-center justify-center text-gray-400">
+                            class="form-input w-full pl-10 py-2.5 border border-gray-300 focus:outline-none text-sm"
+                            placeholder="••••••••">
+                        <div class="password-toggle">
                             <i class="ri-eye-line" id="togglePassword"></i>
                         </div>
                     </div>
@@ -153,27 +159,48 @@
                     <label class="custom-checkbox flex items-center">
                         <input type="checkbox" id="remember" name="remember">
                         <span class="checkmark mr-2"></span>
-                        <span class="text-sm text-gray-700">Запомнить меня</span>
+                        <span class="text-sm text-gray-700 font-light">Запомнить меня</span>
                     </label>
                 </div>
 
                 <!-- Кнопка входа -->
                 <button type="submit"
-                    class="w-full bg-primary text-white py-3 rounded-button font-medium hover:bg-primary/90 transition whitespace-nowrap">Войти</button>
+                    class="w-full bg-primary text-white py-2.5 rounded-button font-medium hover:bg-primary/90 transition whitespace-nowrap text-sm">
+                    Войти
+                </button>
             </form>
 
             <!-- Регистрация -->
             <div class="mt-8 pt-6 border-t border-gray-200 text-center">
-                <p class="text-gray-600">Нет аккаунта? <a href="#"
+                <p class="text-gray-600 font-light text-sm">Нет аккаунта? <a href="#"
                         class="text-primary font-medium hover:underline">Зарегистрироваться</a></p>
             </div>
         </div>
     </main>
 
     <!-- Подвал -->
-    <footer class="bg-primary text-white py-6">
-        <div class="container mx-auto px-4 text-center">
-            <p>© 2025 Академия Знаний. Все права защищены.</p>
+    <footer class="bg-white py-20">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-10">
+                <div data-aos="fade-up" data-aos-delay="100" class="text-center">
+                    <h3 class="text-2xl font-bold mb-6 text-[#0046d1]">Диплом</h3>
+                    <p class="mb-3 text-[#003297] font-light text-base">141960, Москва,</p>
+                    <p class="text-[#003297] font-light text-base">Талдом, рп. Запрудня</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200" class="text-center">
+                    <h3 class="text-2xl font-bold mb-6 text-[#0046d1]">Время</h3>
+                    <p class="mb-3 text-[#003297] font-light text-base">Понедельник — Пятница</p>
+                    <p class="text-[#003297] font-light text-base">С 8:00 до 22:00</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300" class="text-center">
+                    <h3 class="text-2xl font-bold mb-6 text-[#0046d1]">Контакт</h3>
+                    <p class="mb-3 text-[#003297] font-light text-base">crybabyfckk@gmail.com</p>
+                    <p class="text-[#003297] font-light text-base">(901) 756-6764</p>
+                </div>
+            </div>
+            <div class="mt-16 pt-0 text-center" data-aos="fade-up" data-aos-delay="400">
+                <p class="text-[#003297] font-light text-sm">Designed by xf1st</p>
+            </div>
         </div>
     </footer>
 
@@ -182,19 +209,23 @@
             const togglePassword = document.getElementById('togglePassword');
             const passwordField = document.getElementById('password');
 
-            togglePassword.addEventListener('click', function () {
-                const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-                passwordField.setAttribute('type', type);
+            if (togglePassword && passwordField) {
+                togglePassword.addEventListener('click', function () {
+                    const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordField.setAttribute('type', type);
 
-                if (type === 'text') {
-                    togglePassword.classList.remove('ri-eye-line');
-                    togglePassword.classList.add('ri-eye-off-line');
-                } else {
-                    togglePassword.classList.remove('ri-eye-off-line');
-                    togglePassword.classList.add('ri-eye-line');
-                }
-            });
+                    this.classList.toggle('ri-eye-line');
+                    this.classList.toggle('ri-eye-off-line');
+                });
+            }
         });
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800,
+        once: true
+      });
     </script>
 </body>
 
