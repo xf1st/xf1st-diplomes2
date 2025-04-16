@@ -53,10 +53,18 @@
                 <a href="index.html"><span class="text-2xl font-bold">xf1st</span></a>
             </div>
             <nav class="hidden md:flex space-x-6" data-aos="fade-down" data-aos-delay="100">
-                <a href="index.html" class="hover:text-gray-300">Главная страница</a>
-                <a href="index.html#services" class="hover:text-gray-300">Услуги</a>
-                <a href="about.html" class="text-white font-medium">О нас</a>
-                <a href="contact.html" class="hover:text-gray-300">Контакты</a>
+                <a href="index.html" class="hover:text-gray-300 relative group">Главная страница
+                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                </a>
+                <a href="index.html#services" class="hover:text-gray-300 relative group">Услуги
+                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                </a>
+                <a href="about.html" class="text-white font-medium relative group">О нас
+                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                </a>
+                <a href="contact.html" class="hover:text-gray-300 relative group">Контакты
+                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                </a>
             </nav>
             <div class="flex items-center" data-aos="fade-left" data-aos-delay="200">
                 <a href="auth.html"
@@ -372,35 +380,61 @@
             </div>
         </section>
     </main>
-    <footer class="bg-white py-20">
+    <footer class="bg-primary text-white py-12">
         <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-3 gap-10">
-                <div data-aos="fade-up" data-aos-delay="100" class="text-center">
-                    <h3 class="text-2xl font-bold mb-6 text-[#0046d1]">Диплом</h3>
-                    <p class="mb-3 text-[#003297] font-light text-base">
-                        <a href="https://www.google.com/maps/place/141960,+Москва,+Талдом,+рп.+Запрудня" target="_blank" rel="noopener" class="contact-link">141960, Москва,</a>
-                    </p>
-                    <p class="text-[#003297] font-light text-base">
-                        <a href="https://www.google.com/maps/place/141960,+Москва,+Талдом,+рп.+Запрудня" target="_blank" rel="noopener" class="contact-link">Талдом, рп. Запрудня</a>
-                    </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Контакты</h3>
+                    <div class="space-y-2">
+                        <p class="flex items-center">
+                            <i class="ri-map-pin-line mr-2"></i>
+                            <a href="https://maps.google.com/?q=141960, Москва, Талдом, рп. Запрудня" 
+                               class="link-hover hover:text-gray-300 transition-colors duration-300">
+                                141960, Москва,<br>Талдом, рп. Запрудня
+                            </a>
+                        </p>
+                        <p class="flex items-center">
+                            <i class="ri-mail-line mr-2"></i>
+                            <a href="mailto:crybabyfckk@gmail.com" 
+                               class="link-hover hover:text-gray-300 transition-colors duration-300">
+                                crybabyfckk@gmail.com
+                            </a>
+                        </p>
+                        <p class="flex items-center">
+                            <i class="ri-phone-line mr-2"></i>
+                            <a href="tel:+79017566764" 
+                               class="phone-mask link-hover hover:text-gray-300 transition-colors duration-300">
+                                (901) 756-6764
+                            </a>
+                        </p>
+                    </div>
                 </div>
-                <div data-aos="fade-up" data-aos-delay="200" class="text-center">
-                    <h3 class="text-2xl font-bold mb-6 text-[#0046d1]">Время</h3>
-                    <p class="mb-3 text-[#003297] font-light text-base">Понедельник — Пятница</p>
-                    <p class="text-[#003297] font-light text-base">С 8:00 до 22:00</p>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Навигация</h3>
+                    <nav class="space-y-2">
+                        <a href="index.html" class="block link-hover hover:text-gray-300 transition-colors duration-300">Главная страница</a>
+                        <a href="index.html#services" class="block link-hover hover:text-gray-300 transition-colors duration-300">Услуги</a>
+                        <a href="about.html" class="block link-hover hover:text-gray-300 transition-colors duration-300">О нас</a>
+                        <a href="contact.html" class="block link-hover hover:text-gray-300 transition-colors duration-300">Контакты</a>
+                    </nav>
                 </div>
-                <div data-aos="fade-up" data-aos-delay="300" class="text-center">
-                    <h3 class="text-2xl font-bold mb-6 text-[#0046d1]">Контакт</h3>
-                    <p class="mb-3 text-[#003297] font-light text-base">
-                        <a href="mailto:crybabyfckk@gmail.com" class="contact-link">crybabyfckk@gmail.com</a>
-                    </p>
-                    <p class="text-[#003297] font-light text-base">
-                        <a href="tel:+79017566764" class="contact-link">(901) 756-6764</a>
-                    </p>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Социальные сети</h3>
+                    <div class="flex space-x-4">
+                        <a href="https://wa.me/79017566764" class="link-hover hover:text-gray-300 transition-colors duration-300">
+                            <i class="ri-whatsapp-line ri-xl"></i>
+                        </a>
+                        <a href="https://t.me/maybeskyy" class="link-hover hover:text-gray-300 transition-colors duration-300">
+                            <i class="ri-telegram-line ri-xl"></i>
+                        </a>
+                        <a href="https://vk.com/maybeprincess" class="link-hover hover:text-gray-300 transition-colors duration-300">
+                            <i class="ri-vk-line ri-xl"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="mt-16 pt-0 text-center" data-aos="fade-up" data-aos-delay="400">
-                <p class="text-[#003297] font-light text-sm">Designed by xf1st</p>
+            <div class="mt-8 pt-8 border-t border-white/10 text-center">
+                <p>&copy; 2025 xf1st. Все права защищены.</p>
             </div>
         </div>
     </footer>
@@ -537,11 +571,45 @@
     </script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-      AOS.init({
-        duration: 800,
-        once: true
-      });
+        AOS.init({
+            duration: 800,
+            once: true
+        });
 
+        // Обработка кликов по контактной информации
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обработка клика по адресу
+            const addressLinks = document.querySelectorAll('a[href*="maps.google.com"]');
+            addressLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const address = this.getAttribute('href').split('q=')[1];
+                    window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`, '_blank');
+                });
+            });
+
+            // Обработка клика по телефону
+            const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+            phoneLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const phone = this.getAttribute('href').replace('tel:', '');
+                    window.open(`tel:${phone}`, '_self');
+                });
+            });
+
+            // Обработка клика по email
+            const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
+            emailLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const email = this.getAttribute('href').replace('mailto:', '');
+                    window.open(`mailto:${email}`, '_self');
+                });
+            });
+        });
+    </script>
+    <script>
       document.addEventListener('DOMContentLoaded', function () {
           const menuButton = document.getElementById('mobile-menu-button');
           const mobileMenu = document.getElementById('mobile-menu');
