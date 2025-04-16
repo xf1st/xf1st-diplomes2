@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контактная информация - Академический сервис</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config = { theme: { extend: { colors: { primary: '#00236a', secondary: '#002f8f' }, borderRadius: { 'none': '0px', 'sm': '0px', DEFAULT: '0px', 'md': '0px', 'lg': '0px', 'xl': '0px', '2xl': '0px', '3xl': '0px', 'full': '0px', 'button': '0px' } } } }</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        :where([class^="ri-"])::before {
+            content: "\f3c2"; /* Default icon */
+        }
+        body {
+            font-family: 'Rubik', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-[#f9f7f4]">
+    <header class="bg-primary text-white">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center" data-aos="fade-right">
+                <div class="w-10 h-10 flex items-center justify-center mr-2">
+                     <i class="ri-book-open-line ri-2x"></i>
+                </div>
+                <a href="index.html"><span class="text-2xl font-bold">xf1st</span></a>
+            </div>
+            <nav class="hidden md:flex space-x-6" data-aos="fade-down" data-aos-delay="100">
+                <a href="index.html" class="hover:text-gray-300">Главная страница</a>
+                <a href="index.html#services" class="hover:text-gray-300">Услуги</a>
+                <a href="about.html" class="hover:text-gray-300">О нас</a>
+                <a href="contact.html" class="text-white font-medium">Контакты</a>
+            </nav>
+            <div class="flex items-center" data-aos="fade-left" data-aos-delay="200">
+                <a href="auth.html"
+                    data-readdy="true"
+                    class="px-4 py-2 text-primary bg-white rounded-button whitespace-nowrap hover:bg-gray-100 transition">Войти</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="bg-primary text-white py-20">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2" data-aos="fade-right">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-6">Контактная информация</h1>
+                        <p class="text-lg font-light mb-8">Для связи с нами используйте указанный адрес и телефон. Мы также предоставляем форму для обратной связи.</p>
+                    </div>
+                    <div class="md:w-1/2" data-aos="fade-left" data-aos-delay="200">
+                        <img src="https://readdy.ai/api/search-image?query=A%20young%20female%20student%20studying%20at%20a%20desk%20with%20books%20and%20laptop%2C%20bright%20modern%20interior%20with%20natural%20light%20coming%20through%20windows%2C%20clean%20workspace%20environment%2C%20professional%20academic%20setting&width=600&height=500&seq=123&orientation=landscape"
+                            alt="Студент за учебой" class="rounded-lg shadow-xl object-cover object-top w-full h-auto max-h-[400px]">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="bg-[#f9f7f4] py-20 border-t border-gray-200">
+            <div class="container mx-auto px-4">
+                <div class="text-center max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold mb-6 text-primary" data-aos="fade-up">Напишите нам прямо сейчас</h2>
+                    <p class="text-lg font-light text-gray-700 mb-12" data-aos="fade-up" data-aos-delay="100">Мы готовы помочь вам с вашей дипломной работой. Свяжитесь с нами любым удобным способом, и мы обсудим все детали.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 max-w-3xl mx-auto">
+                        <a href="https://wa.me/79017566764" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center justify-center p-5 bg-white rounded-md shadow-md hover:shadow-lg hover:bg-gray-50 transition group"
+                            data-aos="fade-up" data-aos-delay="200">
+                            <i class="ri-whatsapp-fill ri-xl text-[#25D366] mr-3"></i>
+                            <span class="font-medium text-base text-primary">WhatsApp</span>
+                        </a>
+                        <a href="https://t.me/maybeskyy" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center justify-center p-5 bg-white rounded-md shadow-md hover:shadow-lg hover:bg-gray-50 transition group"
+                             data-aos="fade-up" data-aos-delay="300">
+                            <i class="ri-telegram-fill ri-xl text-[#0088cc] mr-3"></i>
+                            <span class="font-medium text-base text-primary">Telegram</span>
+                        </a>
+                        <a href="https://vk.com/maybeprincess" target="_blank" rel="noopener noreferrer"
+                            class="flex items-center justify-center p-5 bg-white rounded-md shadow-md hover:shadow-lg hover:bg-gray-50 transition group"
+                             data-aos="fade-up" data-aos-delay="400">
+                            <i class="ri-vk-fill ri-xl text-[#45668e] mr-3"></i>
+                            <span class="font-medium text-base text-primary">ВК</span>
+                        </a>
+                    </div>
+                    <div class="bg-white rounded-lg p-6 max-w-xl mx-auto border border-gray-200" data-aos="fade-up" data-aos-delay="500">
+                        <p class="text-lg font-light text-primary mb-4">Скопируйте пример текста для заявки на диплом:</p>
+                        <div class="relative">
+                            <label for="copyText" class="sr-only">Пример текста заявки</label>
+                            <textarea id="copyText" readonly aria-label="Пример текста заявки"
+                                class="w-full bg-gray-50 border border-gray-300 rounded-md px-4 py-3 text-left font-sans text-gray-700 text-sm resize-none h-48" 
+                                >Здравствуйте! Хочу заказать дипломную работу.
+Тема: [Ваша тема]
+Имя Фамилия: [Ваше имя и фамилия]
+Место прохождния практики: [Название предприятия]
+Срок сдачи: [Желаемая дата]
+Объем: [Примерный объем]
+Желаемая оценка: [3, 4, 5]
+Дополнительные требования: [Опишите требования]</textarea>
+                            <button onclick="copyToClipboard()" aria-label="Скопировать текст заявки"
+                                class="absolute right-3 top-3 bg-gray-200 p-2 rounded-md hover:bg-gray-300 transition">
+                                <i class="ri-file-copy-line ri-lg text-gray-600"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contact-form" class="py-24 bg-[#f9f7f4]">
+            <div class="container mx-auto px-4">
+                 <div class="grid md:grid-cols-2 gap-16 items-start">
+                    <div data-aos="fade-right">
+                        <h2 class="text-3xl font-bold text-[#0046d1] mb-8">Связаться</h2>
+                        <div class="space-y-3 text-sm">
+                            <p class="text-[#003297] font-light flex items-center">
+                                <i class="ri-phone-line mr-3"></i> (901) 756-6764
+                            </p>
+                            <p class="text-[#003297] font-light flex items-center">
+                                <i class="ri-mail-line mr-3"></i> crybabyfckk@gmail.com
+                            </p>
+                            <p class="text-[#003297] font-light flex items-center">
+                                <i class="ri-map-pin-line mr-3"></i> 141960, Москва, Талдом, рп. Запрудня
+                             </p>
+                        </div>
+                    </div>
+                    <div data-aos="fade-left" data-aos-delay="100">
+                        <form class="space-y-5" action="https://docs.google.com/forms/d/e/1FAIpQLSeyRveJiSkIVaFoV_HIl_cOS4It2Db97A_y5MR5isvm0CIP3Q/formResponse" method="POST" >
+                            <div data-aos="fade-up" data-aos-delay="200">
+                                <label for="name" class="block text-xs font-medium text-gray-600 mb-1">Имя</label>
+                                <input type="text" id="name" name="entry.2103735898"
+                                    class="w-full px-4 py-2 border border-primary/30 rounded-md focus:outline-none focus:ring-1 focus:ring-primary/50 focus:border-primary/50 text-sm"
+                                    placeholder="">
+                            </div>
+                            <div data-aos="fade-up" data-aos-delay="300">
+                                <label for="email" class="block text-xs font-medium text-gray-600 mb-1">E-mail <span class="text-gray-400">(обязательно)</span></label>
+                                <input type="email" id="email" name="entry.2016228396"
+                                    class="w-full px-4 py-2 border border-primary/30 rounded-md focus:outline-none focus:ring-1 focus:ring-primary/50 focus:border-primary/50 text-sm"
+                                    placeholder="">
+                            </div>
+                            <div data-aos="fade-up" data-aos-delay="400">
+                                <label for="message" class="block text-xs font-medium text-gray-600 mb-1">Сообщение</label>
+                                <textarea id="message" name="entry.954100367" rows="5"
+                                    class="w-full px-4 py-2 border border-primary/30 rounded-md resize-none focus:outline-none focus:ring-1 focus:ring-primary/50 focus:border-primary/50 text-sm"
+                                    placeholder=""></textarea>
+                            </div>
+                            <div data-aos="fade-up" data-aos-delay="500">
+                                <button type="submit"
+                                    class="bg-primary text-white px-6 py-2 rounded-md hover:bg-primary/90 transition whitespace-nowrap text-sm">Отправить</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script>
+            function copyToClipboard() {
+                const copyText = document.getElementById("copyText");
+                copyText.select();
+                copyText.setSelectionRange(0, 99999);
+                navigator.clipboard.writeText(copyText.value);
+                const button = document.querySelector('[onclick="copyToClipboard()"]');
+                const originalIconHTML = button.innerHTML;
+                button.innerHTML = '<i class="ri-check-line text-green-400 ri-lg"></i>';
+                setTimeout(() => {
+                    button.innerHTML = originalIconHTML;
+                }, 2000);
+            }
+        </script>
+    </main>
+    <footer class="bg-white py-20">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-10">
+                <div data-aos="fade-up" data-aos-delay="100" class="text-center">
+                    <h3 class="text-2xl font-bold mb-6 text-[#0046d1]">Диплом</h3>
+                    <p class="mb-3 text-[#003297] font-light text-base">141960, Москва,</p>
+                    <p class="text-[#003297] font-light text-base">Талдом, рп. Запрудня</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200" class="text-center">
+                    <h3 class="text-2xl font-bold mb-6 text-[#0046d1]">Время</h3>
+                    <p class="mb-3 text-[#003297] font-light text-base">Понедельник — Пятница</p>
+                    <p class="text-[#003297] font-light text-base">С 8:00 до 22:00</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300" class="text-center">
+                    <h3 class="text-2xl font-bold mb-6 text-[#0046d1]">Контакт</h3>
+                    <p class="mb-3 text-[#003297] font-light text-base">crybabyfckk@gmail.com</p>
+                    <p class="text-[#003297] font-light text-base">(901) 756-6764</p>
+                </div>
+            </div>
+            <div class="mt-16 pt-0 text-center" data-aos="fade-up" data-aos-delay="400">
+                <p class="text-[#003297] font-light text-sm">Designed by xf1st</p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800,
+        once: true
+      });
+    </script>
+</body>
+
+</html>
