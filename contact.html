@@ -50,6 +50,15 @@
         .toast-close:hover {
             opacity: 1;
         }
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        #mobile-menu:not(.hidden) {
+            transform: translateY(0);
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -113,22 +122,22 @@
                 <div class="text-center max-w-4xl mx-auto">
                     <h2 class="text-3xl font-bold mb-6 text-primary" data-aos="fade-up">Напишите нам прямо сейчас</h2>
                     <p class="text-lg font-light text-gray-700 mb-4" data-aos="fade-up" data-aos-delay="100">Мы готовы помочь вам с вашей дипломной работой. Свяжитесь с нами любым удобным способом, и мы обсудим все детали.</p>
-                    <p class="text-lg font-light text-gray-700 mb-12" data-aos="fade-up" data-aos-delay="100">Примечание: После согласования стоимости необходимо внести предоплату в размере 50% от общей суммы заказа.</p>
+                    <p class="text-sm font-light text-gray-500 mb-12" data-aos="fade-up" data-aos-delay="100">Примечание: После согласования стоимости необходимо внести предоплату в размере 50% от общей суммы заказа.</p>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12 max-w-3xl mx-auto">
                         <a href="https://wa.me/79017566764" target="_blank" rel="noopener noreferrer"
-                            class="flex items-center justify-center p-5 bg-white rounded-md shadow-md hover:shadow-lg hover:bg-gray-50 transition group"
+                            class="flex items-center justify-center p-5 bg-white rounded-md shadow-md hover:shadow-lg hover:bg-gray-50 transition group transform hover:scale-105"
                             data-aos="fade-up" data-aos-delay="200">
                             <i class="ri-whatsapp-fill ri-xl text-[#25D366] mr-3"></i>
                             <span class="font-medium text-base text-primary">WhatsApp</span>
                         </a>
                         <a href="https://t.me/maybeskyy" target="_blank" rel="noopener noreferrer"
-                            class="flex items-center justify-center p-5 bg-white rounded-md shadow-md hover:shadow-lg hover:bg-gray-50 transition group"
+                            class="flex items-center justify-center p-5 bg-white rounded-md shadow-md hover:shadow-lg hover:bg-gray-50 transition group transform hover:scale-105"
                              data-aos="fade-up" data-aos-delay="300">
                             <i class="ri-telegram-fill ri-xl text-[#0088cc] mr-3"></i>
                             <span class="font-medium text-base text-primary">Telegram</span>
                         </a>
                         <a href="https://vk.com/maybeprincess" target="_blank" rel="noopener noreferrer"
-                            class="flex items-center justify-center p-5 bg-white rounded-md shadow-md hover:shadow-lg hover:bg-gray-50 transition group"
+                            class="flex items-center justify-center p-5 bg-white rounded-md shadow-md hover:shadow-lg hover:bg-gray-50 transition group transform hover:scale-105"
                              data-aos="fade-up" data-aos-delay="400">
                             <i class="ri-vk-fill ri-xl text-[#45668e] mr-3"></i>
                             <span class="font-medium text-base text-primary">ВК</span>
@@ -184,19 +193,19 @@
                                 <label for="name" class="block text-xs font-medium text-gray-600 mb-1">Имя</label>
                                 <input type="text" id="name" name="entry.2103735898"
                                     class="w-full px-4 py-2 border border-primary/30 rounded-md focus:outline-none focus:ring-1 focus:ring-primary/50 focus:border-primary/50 text-sm"
-                                    placeholder="">
+                                    placeholder="" aria-label="Введите ваше имя">
                             </div>
                             <div data-aos="fade-up" data-aos-delay="300">
                                 <label for="email" class="block text-xs font-medium text-gray-600 mb-1">E-mail <span class="text-gray-400">(обязательно)</span></label>
                                 <input type="email" id="email" name="entry.2016228396"
                                     class="w-full px-4 py-2 border border-primary/30 rounded-md focus:outline-none focus:ring-1 focus:ring-primary/50 focus:border-primary/50 text-sm"
-                                    placeholder="">
+                                    placeholder="" aria-label="Введите ваш email">
                             </div>
                             <div data-aos="fade-up" data-aos-delay="400">
                                 <label for="message" class="block text-xs font-medium text-gray-600 mb-1">Сообщение</label>
                                 <textarea id="message" name="entry.954100367" rows="5"
                                     class="w-full px-4 py-2 border border-primary/30 rounded-md resize-none focus:outline-none focus:ring-1 focus:ring-primary/50 focus:border-primary/50 text-sm"
-                                    placeholder=""></textarea>
+                                    placeholder="" aria-label="Введите ваше сообщение"></textarea>
                             </div>
                             <div data-aos="fade-up" data-aos-delay="500">
                                 <button type="submit"
