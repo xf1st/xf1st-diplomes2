@@ -16,6 +16,7 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <style>
         html {
             scroll-behavior: smooth;
@@ -26,6 +27,37 @@
 
         body {
             font-family: 'Rubik', sans-serif;
+        }
+        .toastify {
+            background: linear-gradient(to right, #00236a, #002f8f);
+            border-radius: 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding-right: 40px;
+            cursor: pointer;
+        }
+        .toastify.on {
+            background: linear-gradient(to right, #00236a, #002f8f);
+        }
+        .toast-close {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            opacity: 0.7;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .toast-close:hover {
+            opacity: 1;
+        }
+        .contact-link {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .contact-link:hover {
+            color: #002f8f;
         }
     </style>
 </head>
@@ -332,8 +364,12 @@
             <div class="grid md:grid-cols-3 gap-10">
                 <div data-aos="fade-up" data-aos-delay="100" class="text-center">
                     <h3 class="text-2xl font-bold mb-6 text-[#0046d1]">Диплом</h3>
-                    <p class="mb-3 text-[#003297] font-light text-base">141960, Москва,</p>
-                    <p class="text-[#003297] font-light text-base">Талдом, рп. Запрудня</p>
+                    <p class="mb-3 text-[#003297] font-light text-base">
+                        <a href="https://www.google.com/maps/place/141960,+Москва,+Талдом,+рп.+Запрудня" target="_blank" rel="noopener" class="contact-link">141960, Москва,</a>
+                    </p>
+                    <p class="text-[#003297] font-light text-base">
+                        <a href="https://www.google.com/maps/place/141960,+Москва,+Талдом,+рп.+Запрудня" target="_blank" rel="noopener" class="contact-link">Талдом, рп. Запрудня</a>
+                    </p>
                 </div>
                 <div data-aos="fade-up" data-aos-delay="200" class="text-center">
                     <h3 class="text-2xl font-bold mb-6 text-[#0046d1]">Время</h3>
@@ -342,8 +378,12 @@
                 </div>
                 <div data-aos="fade-up" data-aos-delay="300" class="text-center">
                     <h3 class="text-2xl font-bold mb-6 text-[#0046d1]">Контакт</h3>
-                    <p class="mb-3 text-[#003297] font-light text-base">crybabyfckk@gmail.com</p>
-                    <p class="text-[#003297] font-light text-base">(901) 756-6764</p>
+                    <p class="mb-3 text-[#003297] font-light text-base">
+                        <a href="mailto:crybabyfckk@gmail.com" class="contact-link">crybabyfckk@gmail.com</a>
+                    </p>
+                    <p class="text-[#003297] font-light text-base">
+                        <a href="tel:+79017566764" class="contact-link">(901) 756-6764</a>
+                    </p>
                 </div>
             </div>
             <div class="mt-16 pt-0 text-center" data-aos="fade-up" data-aos-delay="400">
@@ -352,41 +392,108 @@
         </div>
     </footer>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  AOS.init({
-    duration: 800,
-    once: true
-  });
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script>
+      AOS.init({
+        duration: 800,
+        once: true
+      });
 
-  document.addEventListener('DOMContentLoaded', function () {
-      const menuButton = document.getElementById('mobile-menu-button');
-      const mobileMenu = document.getElementById('mobile-menu');
-      const menuIcon = menuButton ? menuButton.querySelector('i') : null;
-
-      if (menuButton && mobileMenu && menuIcon) {
-          menuButton.addEventListener('click', () => {
-              const isHidden = mobileMenu.classList.toggle('hidden');
-              
-              if (!isHidden) {
-                  menuIcon.classList.remove('ri-menu-line');
-                  menuIcon.classList.add('ri-close-line');
-              } else {
-                  menuIcon.classList.remove('ri-close-line');
-                  menuIcon.classList.add('ri-menu-line');
+      function showToast(message, type = 'success') {
+          const toast = Toastify({
+              text: message,
+              duration: 5000,
+              gravity: "top",
+              position: "right",
+              style: {
+                  background: "linear-gradient(to right, #00236a, #002f8f)",
+                  borderRadius: "0",
+                  boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
+              },
+              onClick: function() {
+                  toast.hideToast();
               }
           });
 
-          const mobileLinks = mobileMenu.querySelectorAll('a');
-          mobileLinks.forEach(link => {
-              link.addEventListener('click', () => {
-                  mobileMenu.classList.add('hidden'); 
-                  menuIcon.classList.remove('ri-close-line');
-                  menuIcon.classList.add('ri-menu-line');
+          const closeButton = document.createElement('span');
+          closeButton.className = 'toast-close';
+          closeButton.innerHTML = '<i class="ri-close-line"></i>';
+          closeButton.onclick = function(e) {
+              e.stopPropagation();
+              toast.hideToast();
+          };
+
+          toast.showToast();
+          const toastElement = document.querySelector('.toastify:last-child');
+          if (toastElement) {
+              toastElement.appendChild(closeButton);
+          }
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+          const forms = document.querySelectorAll('form');
+          forms.forEach(form => {
+              form.addEventListener('submit', function(e) {
+                  e.preventDefault();
+                  showToast("Ваше сообщение отправлено! Мы свяжемся с вами в ближайшее время.");
+                  setTimeout(() => form.submit(), 2000);
               });
           });
-      }
-  });
-</script>
+
+          const socialButtons = document.querySelectorAll('a[target="_blank"]');
+          socialButtons.forEach(button => {
+              button.addEventListener('click', function(e) {
+                  e.preventDefault();
+                  const href = this.getAttribute('href');
+                  showToast("Открываем ссылку в новом окне...");
+                  setTimeout(() => window.open(href, '_blank'), 500);
+              });
+          });
+
+          const contactLinks = document.querySelectorAll('.contact-link');
+          contactLinks.forEach(link => {
+              link.addEventListener('click', function(e) {
+                  e.preventDefault();
+                  const href = this.getAttribute('href');
+                  if (href.startsWith('mailto:')) {
+                      showToast("Открываем почтовый клиент...");
+                  } else if (href.startsWith('tel:')) {
+                      showToast("Начинаем звонок...");
+                  }
+                  setTimeout(() => window.location.href = href, 500);
+              });
+          });
+      });
+
+      document.addEventListener('DOMContentLoaded', function () {
+          const menuButton = document.getElementById('mobile-menu-button');
+          const mobileMenu = document.getElementById('mobile-menu');
+          const menuIcon = menuButton ? menuButton.querySelector('i') : null;
+
+          if (menuButton && mobileMenu && menuIcon) {
+              menuButton.addEventListener('click', () => {
+                  const isHidden = mobileMenu.classList.toggle('hidden');
+                  
+                  if (!isHidden) {
+                      menuIcon.classList.remove('ri-menu-line');
+                      menuIcon.classList.add('ri-close-line');
+                  } else {
+                      menuIcon.classList.remove('ri-close-line');
+                      menuIcon.classList.add('ri-menu-line');
+                  }
+              });
+
+              const mobileLinks = mobileMenu.querySelectorAll('a');
+              mobileLinks.forEach(link => {
+                  link.addEventListener('click', () => {
+                      mobileMenu.classList.add('hidden'); 
+                      menuIcon.classList.remove('ri-close-line');
+                      menuIcon.classList.add('ri-menu-line');
+                  });
+              });
+          }
+      });
+    </script>
 </body>
 
 </html>
