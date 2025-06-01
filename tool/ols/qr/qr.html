@@ -3,28 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Tools">
-  <meta name="keywords" content="Tools">
-  <meta name="author" content="xf1st">
-  <meta name="robots" content="index, follow">
-  <meta name="language" content="ru">
-  <meta name="revisit-after" content="7 days">
-  <link rel="icon" href="../favicon2.png">
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://tool.xf1st.ru/">
-  <meta property="og:title" content="Tools">
-  <meta property="og:description" content="Tools">
-  <meta property="og:image" content="https://tool.xf1st.ru/favicon.png">
-
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://tool.xf1st.ru/">
-  <meta property="twitter:title" content="Tools">
-  <meta property="twitter:description" content="Tools">
-  <meta property="twitter:image" content="https://tool.xf1st.ru/favicon.png">
-  <title>Инструменты</title>
+  <title>QR Code Generator</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script> 
@@ -84,28 +63,46 @@
 <!-- Контент страницы -->
 <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
   <div class="w-full max-w-md bg-black/30 backdrop-blur-xl rounded-xl shadow-lg border border-white/20 p-6 space-y-6">
-    <h1 style="text-align: center; font-size: 2rem; font-weight: bold;">Tools</h1>
-    <!-- <a href="bus/index.html" class="glass-border group flex flex-col items-center p-4 w-full rounded-xl transition-all duration-300 transform hover:scale-[1.02]">
+    <a href="../index.html" class="glass-border group flex flex-col items-center p-4 w-full rounded-xl transition-all duration-300 transform hover:scale-[1.02]">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="hammer" class="lucide lucide-qr-code w-6 h-6 text-white group-hover:text-green-400 transition-colors duration-300"></svg>
-        <h2 class="mt-3 text-lg font-medium text-white font-[Montserrat]">Билеты на автобус</h2>
-    </a> -->
-    <a href="qr.html" class="glass-border group flex flex-col items-center p-4 w-full rounded-xl transition-all duration-300 transform hover:scale-[1.02]">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" class="lucide lucide-qr-code w-6 h-6 text-white group-hover:text-green-400 transition-colors duration-300"></svg>
-        <h2 class="mt-3 text-lg font-medium text-white font-[Montserrat]">QR-коды</h2>
+        <h2 class="mt-3 text-lg font-medium text-white font-[Montserrat]">Tools</h2>
     </a>
-    <a href="weather.html" class="glass-border group flex flex-col items-center p-4 w-full rounded-xl transition-all duration-300 transform hover:scale-[1.02]">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="cloud-sun" class="lucide lucide-qr-code w-6 h-6 text-white group-hover:text-green-400 transition-colors duration-300"></svg>
-        <h2 class="mt-3 text-lg font-medium text-white font-[Montserrat]">Погода на улице</h2>
-    </a>
-    <a href="randomm.html" class="glass-border group flex flex-col items-center p-4 w-full rounded-xl transition-all duration-300 transform hover:scale-[1.02]">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="dices" class="lucide lucide-qr-code w-6 h-6 text-white group-hover:text-green-400 transition-colors duration-300"></svg>
-        <h2 class="mt-3 text-lg font-medium text-white font-[Montserrat]">Рандомайзер</h2>
-    </a>
-    <a href="https://xf1st.ru" class="glass-border group flex flex-col items-center p-4 w-full rounded-xl transition-all duration-300 transform hover:scale-[1.02]">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="home" class="lucide lucide-qr-code w-6 h-6 text-white group-hover:text-green-400 transition-colors duration-300"></svg>
-        <h2 class="mt-3 text-lg font-medium text-white font-[Montserrat]">Главная</h2>
-    </a>
-    
+    <!-- Заголовок -->
+    <h1 class="text-2xl font-bold text-center">🖼️ Генератор QR-кодов</h1>
+
+    <!-- Форма ввода -->
+    <form id="qrForm" class="space-y-4">
+      <textarea id="inputText"
+                rows="3"
+                placeholder="Введите текст или ссылку..."
+                class="w-full px-4 py-2 bg-gray-700 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                required></textarea>
+
+      <button type="submit"
+              class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors">
+        Сгенерировать QR
+      </button>
+    </form>
+
+    <!-- Прогресс бар загрузки -->
+    <div id="loading" class="hidden w-full h-1 bg-blue-500 rounded-full overflow-hidden">
+      <div class="progress-bar h-full bg-blue-300 animate-pulse"></div>
+    </div>
+
+    <!-- QR код -->
+    <div class="flex justify-center mt-6">
+      <div id="qrcode" class="qr-code duration-300"></div>
+    </div>
+
+    <!-- Кнопка скачивания -->
+    <div class="flex justify-center mt-4">
+      <a id="downloadLink" download="qrcode.png" class="hidden">
+        <button class="py-2 px-4 bg-green-600 hover:bg-green-700 text-white rounded-md transition-colors">
+          📥 Скачать QR
+        </button>
+      </a>
+    </div>
+
   </div>
 </div>
 
@@ -246,7 +243,7 @@
     const containers = document.querySelectorAll('.shader-container-inner');
     containers.forEach((container, index) => {
       const colors = [
-        [1, 1, 1],
+        [1, 0.8, 1],
         [0.3, 0.8, 1],
         [0.8, 1, 0.4],
       ];
@@ -256,6 +253,57 @@
         amplitude: 0.1 + index * 0.05
       });
     });
+  });
+</script>
+
+<!-- Логика генерации QR -->
+<script>
+  const form = document.getElementById('qrForm');
+  const inputText = document.getElementById('inputText');
+  const qrcodeContainer = document.getElementById('qrcode');
+  const loading = document.getElementById('loading');
+  const downloadLink = document.getElementById('downloadLink');
+
+  let qrCodeInstance;
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const text = inputText.value.trim();
+
+    if (!text) return;
+
+    // Очистка предыдущего QR
+    qrcodeContainer.innerHTML = '';
+    downloadLink.classList.add('hidden');
+    if (qrCodeInstance) qrCodeInstance.clear();
+
+    // Показываем прогресс
+    loading.classList.remove('hidden');
+
+    setTimeout(() => {
+      // Генерация QR
+      qrCodeInstance = new QRCode(qrcodeContainer, {
+        text: text,
+        width: 256,
+        height: 256,
+        colorDark: "#ffffff", 
+        colorLight: "#000000",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+
+      // После отрисовки — показываем кнопку скачивания
+      setTimeout(() => {
+        const canvas = qrcodeContainer.querySelector('canvas');
+        if (canvas) {
+          const dataURL = canvas.toDataURL('image/png');
+          downloadLink.href = dataURL;
+          downloadLink.classList.remove('hidden');
+        }
+        loading.classList.add('hidden');
+        if (canvas) canvas.style.opacity = 1;
+      }, 300);
+    }, 300);
   });
 </script>
 
