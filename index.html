@@ -1,644 +1,727 @@
-<!DOCTYPE html>
 <html lang="ru">
-
-<head>
+  <head>
     <meta charset="UTF-8">
+    <title>xf1st – Портфолио</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Профессиональный сервис по написанию академических работ. Дипломные, курсовые работы, научные статьи. Гарантия качества и уникальности.">
-    <meta name="keywords" content="дипломная работа, курсовая работа, научная статья, академические работы, написание диплома, помощь студентам">
-    <meta name="author" content="xf1st">
-    <title>Академический сервис - Профессиональная помощь студентам</title>
-    <link rel="shortcut icon" href="assets/logo/logo.png" type="image/x-icon">
-    <link rel="icon" href="assets/logo/logo.png" type="image/x-icon">
-    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
-    <script>tailwind.config = { theme: { extend: { colors: { primary: '#00236a', secondary: '#002f8f' }, borderRadius: { 'none': '0px', 'sm': '0px', DEFAULT: '0px', 'md': '0px', 'lg': '0px', 'xl': '0px', '2xl': '0px', '3xl': '0px', 'full': '0px', 'button': '0px' } } } }</script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-        :where([class^="ri-"])::before {
-            content: "\f3c2";
-        }
+    <link rel="icon" href="favicon.jpg">
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #000;
+      scroll-behavior: smooth;
+    }
+    main div h1{
+      margin-top: 4rem;
+    }
+    .shader-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    
+    .shader-bg canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+    
+    .iridescent-glow {
+      pointer-events: none;
+      filter: blur(48px) saturate(1.4) brightness(1.1);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 900px;
+      height: 400px;
+      transform: translate(-50%, -52%);
+      opacity: 0.55;
+      background: conic-gradient(from 160deg, #a5eafc, #f1a1e8, #e0ffb1, #a5eafc 100%);
+      z-index: 1;
+      border-radius: 60% 40% 70% 30% / 40% 60% 30% 70%;
+      animation: iridescentMove 12s linear infinite alternate;
+    }
+    
+    @keyframes iridescentMove {
+      0% { filter: blur(48px) saturate(1.2); opacity: 0.5; transform: translate(-50%,-52%) scale(1);}
+      100% { filter: blur(60px) saturate(1.7); opacity: 0.65; transform: translate(-50%,-53%) scale(1.08);}
+    }
+    
+    .glass-border {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .glass-card {
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .glass-input {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .glass-input:focus {
+      border-color: rgba(139, 92, 246, 0.4);
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .custom-toggle input:checked + .toggle-bg {
+      background: rgba(139, 92, 246, 0.8);
+    }
+    .custom-toggle input:checked + .toggle-bg .toggle-dot {
+      transform: translateX(14px);
+      background: white;
+    }
 
-        body {
-            font-family: 'Rubik', sans-serif;
+    /* Animation Classes */
+    .fade-in {
+      animation: fadeIn 0.8s ease-out forwards;
+      opacity: 0;
+    }
+    
+    .slide-up {
+      animation: slideUp 0.8s ease-out forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    
+    .slide-left {
+      animation: slideLeft 0.8s ease-out forwards;
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    
+    .slide-right {
+      animation: slideRight 0.8s ease-out forwards;
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    
+    .blur-in {
+      animation: blurIn 0.8s ease-out forwards;
+      opacity: 0;
+      filter: blur(10px);
+    }
+    
+    /* Animation Delays */
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+    .delay-500 { animation-delay: 0.5s; }
+    .delay-600 { animation-delay: 0.6s; }
+    .delay-700 { animation-delay: 0.7s; }
+    .delay-800 { animation-delay: 0.8s; }
+    .delay-900 { animation-delay: 0.9s; }
+    .delay-1000 { animation-delay: 1.0s; }
+    .delay-1100 { animation-delay: 1.1s; }
+    .delay-1200 { animation-delay: 1.2s; }
+    
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes slideLeft {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes slideRight {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    @keyframes blurIn {
+      to {
+        opacity: 1;
+        filter: blur(0);
+      }
+    }
+    
+    /* Intersection Observer trigger */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    
+    .animate-on-scroll.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module">
+    import { Renderer, Program, Mesh, Color, Triangle } from 'https://cdn.skypack.dev/ogl';
+    const vertexShader = `
+      attribute vec2 uv;
+      attribute vec2 position;
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = vec4(position, 0, 1);
+      }`;
+    const fragmentShader = `
+      precision highp float;
+      uniform float uTime;
+      uniform vec3 uColor;
+      uniform vec3 uResolution;
+      uniform vec2 uMouse;
+      uniform float uAmplitude;
+      uniform float uSpeed;
+      varying vec2 vUv;
+      void main() {
+        float mr = min(uResolution.x, uResolution.y);
+        vec2 uv = (vUv.xy * 2.0 - 1.0) * uResolution.xy / mr;
+        uv += (uMouse - vec2(0.5)) * uAmplitude;
+        float d = -uTime * 0.5 * uSpeed;
+        float a = 0.0;
+        for (float i = 0.0; i < 8.0; ++i) {
+          a += cos(i - d - a * uv.x);
+          d += sin(uv.y * i + a);
         }
-        .toastify {
-            background: linear-gradient(to right, #00236a, #002f8f);
-            border-radius: 0;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            padding-right: 40px;
-            cursor: pointer;
+        d += uTime * 0.5 * uSpeed;
+        vec3 col = vec3(cos(uv * vec2(d, a)) * 0.6 + 0.4, cos(a + d) * 0.5 + 0.5);
+        col = cos(col * cos(vec3(d, a, 2.5)) * 0.5 + 0.5) * uColor;
+        gl_FragColor = vec4(col, 1.0);
+      }`;
+    class IridescenceShader {
+      constructor(container, options = {}) {
+        this.container = container;
+        this.color = options.color || [1, 0.8, 0.9];
+        this.speed = options.speed || 1.0;
+        this.amplitude = options.amplitude || 0.15;
+        this.mouseReact = options.mouseReact !== false;
+        this.mousePos = { x: 0.5, y: 0.5 };
+        this.init();
+      }
+      init() {
+        this.renderer = new Renderer();
+        this.gl = this.renderer.gl;
+        this.gl.clearColor(0, 0, 0, 1);
+        this.setupGeometry();
+        this.setupEventListeners();
+        this.resize();
+        this.animate();
+        this.container.appendChild(this.gl.canvas);
+      }
+      setupGeometry() {
+        const geometry = new Triangle(this.gl);
+        this.program = new Program(this.gl, {
+          vertex: vertexShader,
+          fragment: fragmentShader,
+          uniforms: {
+            uTime: { value: 0 },
+            uColor: { value: new Color(...this.color) },
+            uResolution: { value: new Color(1, 1, 1) },
+            uMouse: { value: new Float32Array([0.5, 0.5]) },
+            uAmplitude: { value: this.amplitude },
+            uSpeed: { value: this.speed },
+          },
+        });
+        this.mesh = new Mesh(this.gl, { geometry, program: this.program });
+      }
+      setupEventListeners() {
+        this.handleResize = this.resize.bind(this);
+        this.handleMouseMove = this.onMouseMove.bind(this);
+        window.addEventListener('resize', this.handleResize);
+        if (this.mouseReact) {
+          this.container.addEventListener('mousemove', this.handleMouseMove);
         }
-        .toastify.on {
-            background: linear-gradient(to right, #00236a, #002f8f);
+      }
+      resize() {
+        const rect = this.container.getBoundingClientRect();
+        this.renderer.setSize(rect.width, rect.height);
+        if (this.program) {
+          this.program.uniforms.uResolution.value = new Color(
+            this.gl.canvas.width,
+            this.gl.canvas.height,
+            this.gl.canvas.width / this.gl.canvas.height
+          );
         }
-        .toast-close {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            opacity: 0.7;
-            cursor: pointer;
-            transition: opacity 0.2s;
+      }
+      onMouseMove(e) {
+        const rect = this.container.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = 1.0 - (e.clientY - rect.top) / rect.height;
+        this.mousePos = { x, y };
+        this.program.uniforms.uMouse.value[0] = x;
+        this.program.uniforms.uMouse.value[1] = y;
+      }
+      animate(t = 0) {
+        this.animationId = requestAnimationFrame(this.animate.bind(this));
+        this.program.uniforms.uTime.value = t * 0.001;
+        this.renderer.render({ scene: this.mesh });
+      }
+      destroy() {
+        if (this.animationId) cancelAnimationFrame(this.animationId);
+        window.removeEventListener('resize', this.handleResize);
+        if (this.mouseReact) {
+          this.container.removeEventListener('mousemove', this.handleMouseMove);
         }
-        .toast-close:hover {
-            opacity: 1;
+        if (this.gl.canvas.parentNode) {
+          this.gl.canvas.parentNode.removeChild(this.gl.canvas);
         }
-        .contact-link {
-            color: inherit;
-            text-decoration: none;
-            transition: color 0.2s;
+        this.gl.getExtension('WEBGL_lose_context')?.loseContext();
+      }
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.querySelector('.shader-bg');
+      new IridescenceShader(container, {
+        color: [0.95, 0.65, 1.0],
+        speed: 0.82,
+        amplitude: 0.15,
+        mouseReact: true
+      });
+    });
+  </script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'sans': ['Inter', 'system-ui', 'sans-serif'],
+          }
         }
-        .contact-link:hover {
-            color: #002f8f;
-        }
-
-        /* Анимации при наведении */
-        .btn-hover {
-            transition: all 0.3s ease;
-        }
-        .btn-hover:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .link-hover {
-            transition: all 0.2s ease;
-        }
-        .link-hover:hover {
-            color: #4F46E5;
-            transform: translateX(2px);
-        }
-
-        /* Параллакс эффект */
-        .parallax {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        /* Маска для телефона */
-        .phone-mask {
-            font-family: monospace;
-        }
-    </style>
+      }
+    }
+  </script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=IBM+Plex+Serif:wght@300;400;500;600;700&amp;family=IBM+Plex+Mono:wght@300;400;500;600;700&amp;family=Inter&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Serif:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Inter&display=swap" rel="stylesheet">
 </head>
 
-<body class="bg-[#f9f7f4]">
-    <!-- Шапка сайта -->
-    <header class="bg-primary text-white relative">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center" data-aos="fade-right">
-                <div class="w-10 h-10 flex items-center justify-center mr-2">
-                    <i></i>
-                </div>
-                <a href=""><span class="text-2xl font-bold">xf1st</span></a>
-            </div>
-            <nav class="hidden md:flex space-x-6" data-aos="fade-down" data-aos-delay="100">
-                <a href="#" class="hover:text-gray-300 relative group">Главная страница
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-                </a>
-                <a href="#services" class="hover:text-gray-300 relative group">Услуги
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-                </a>
-                <a href="about.html" class="hover:text-gray-300 relative group">О нас
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-                </a>
-                <a href="contact.html" class="hover:text-gray-300 relative group">Контакты
-                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
-                </a>
-            </nav>
-            <div class="flex items-center" data-aos="fade-left" data-aos-delay="200">
-                <a href="auth.html"
-                    data-readdy="true"
-                    class="px-4 py-2 text-primary bg-white rounded-button whitespace-nowrap hover:bg-gray-100 transition hidden md:block">FAQ</a>
-                <button id="mobile-menu-button" aria-label="Открыть меню" class="md:hidden text-white focus:outline-none ml-4">
-                    <i class="ri-menu-line ri-xl"></i>
-                </button>
-            </div>
-        </div>
-        <div id="mobile-menu" class="md:hidden hidden absolute top-full left-0 w-full bg-primary/95 backdrop-blur-sm z-50 shadow-lg">
-            <nav class="flex flex-col p-4 space-y-3">
-                <a href="#" class="text-white hover:bg-white/10 p-2 rounded-md">Главная страница</a>
-                <a href="#services" class="text-white hover:bg-white/10 p-2 rounded-md">Услуги</a>
-                <a href="about.html" class="text-white hover:bg-white/10 p-2 rounded-md">О нас</a>
-                <a href="contact.html" class="text-white hover:bg-white/10 p-2 rounded-md">Контакты</a>
-                <a href="auth.html" class="text-white hover:bg-white/10 p-2 rounded-md">FAQ</a>
-            </nav>
-        </div>
-    </header>
-    <!-- Главный баннер -->
-    <section class="bg-[#00236a] min-h-screen py-16">
-        <div class="container mx-auto px-4">
-            <!-- Верхняя часть: заголовок -->
-            <div class="mb-8" data-aos="fade-up">
-                <h1 class="text-white text-4xl md:text-5xl font-bold leading-tight mb-4">
-                    Ваш надежный сервис<br>для академических работ
-                </h1>
-            </div>
-    
-            <!-- Изображение -->
-            <div class="mb-8" data-aos="zoom-in" data-aos-delay="200">
-                <img src="assets/photos/books-bookstore.jpeg" alt="Academic Books"
-                    class="w-full h-auto rounded-lg shadow-xl mx-auto">
-            </div>
-    
-            <!-- Нижняя часть: описание + кнопка -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start text-white">
-                <!-- Левая колонка: подзаголовок -->
-                <div data-aos="fade-right" data-aos-delay="400">
-                    <p class="text-xl md:text-2xl font-bold">Закажите работу легко</p>
-                </div>
-                
-    
-                <!-- Правая колонка: описание и кнопка -->
-                <div class="pl-6 md:pl-12" data-aos="fade-left" data-aos-delay="500">
-                    <p class="text-base md:text-lg font-light mb-6">
-                        Наша платформа предоставляет возможность заказа академических работ с функциями
-                        для удобного управления процессом, включая личные кабинеты, статусы заявок и
-                        возможность общения с исполнителями.
-                    </p>
-                    <a href="contact.html"
-                        class="inline-block bg-white text-[#00236a] px-6 py-4 font-medium hover:bg-gray-100 transition rounded-button">
-                        Наши услуги
-                    </a>
-                </div>
-                
-            </div>
-        </div>
-    </section>
-    <!-- О нашем сервисе -->
-    <section id="about" class="py-16 bg-[#f9f7f4]">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="md:w-1/2" data-aos="fade-right">
-                    <img src="assets/photos/pexels.jpeg"
-                        alt="Студент за работой" class="shadow-lg object-cover w-full h-full object-top">
-                </div>
-                <div class="md:w-1/2" data-aos="fade-left" data-aos-delay="200">
-                    <h2 class="text-3xl font-bold text-[#003297] mb-6">О нашем сервисе</h2>
-                    <p class="text-[#003297] mb-6">
-                        Наша команда профессиональных авторов специализируется на написании
-                        академических работ любой сложности. У нас есть опыт работы с различными дисциплинами и темами,
-                        что позволяет нам предоставлять качественные услуги для студентов всех специальностей.
-                    </p>
-                    <p class="text-[#003297] mb-8">
-                        Мы гарантируем уникальность каждой работы, соблюдение всех требований
-                        и сроков выполнения. Наша цель — помочь вам достичь академического успеха.
-                    </p>
-                    <button
-                        class="bg-[#003297] text-white px-6 py-3 rounded-button font-medium hover:bg-[#00267a] transition whitespace-nowrap">
-                        Узнать больше
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
+  <body class="bg-black text-gray-100 font-sans antialiased relative min-h-screen bg-black overflow-x-hidden">
+    <!-- Iridescent Shader Canvas -->
+    <div class="shader-bg absolute inset-0"></div>
+    <!-- Soft iridescent light overlay -->
+    <div class="iridescent-glow"></div>
+  <!-- Navbar -->
+  <header class="fixed w-full z-50 glass-border fade-in">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-violet-500 bg-[url(https://images.unsplash.com/photo-1636690581110-a512fed05fd3?w=1080&amp;q=80)] bg-cover rounded-md"></div>
+        <span class="font-medium text-white">xf1st</span>
+      </div>
+      <nav class="flex items-center gap-8 text-sm text-gray-200">
+        <a href="#about" class="hover:text-white transition-colors">Обо мне</a>
+        <a href="#projects" class="hover:text-white transition-colors">Проекты</a>
+        <a href="#contact" class="hover:text-white transition-colors">Связаться</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Услуги -->
-    <section id="services" class="py-16 bg-[#f9f7f4]">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-primary mb-12" data-aos="fade-up">Услуги</h2>
-            <div class="space-y-12">
-                <div class="flex flex-col md:flex-row gap-8 pb-8 border-b border-gray-200" data-aos="fade-up" data-aos-delay="100">
-                    <h3 class="text-2xl font-bold text-primary md:w-1/3">Написание курсовых работ</h3>
-                    <div class="md:w-2/3">
-                        <p class="text-gray-700 mb-4">Создание оригинальных курсовых работ по различным темам.</p>
-                        <a href="contact.html" class="text-primary font-medium hover:underline">Заказать курсовую</a>
-                    </div>
-                </div>
-                <div class="flex flex-col md:flex-row gap-8 pb-8 border-b border-gray-200" data-aos="fade-up" data-aos-delay="200">
-                    <h3 class="text-2xl font-bold text-primary md:w-1/3">Написание дипломных работ</h3>
-                    <div class="md:w-2/3">
-                        <p class="text-gray-700 mb-4">Помощь в написании дипломных работ с глубоким исследованием темы.
-                        </p>
-                        <a href="contact.html" class="text-primary font-medium hover:underline">Заказать дипломную</a>
-                    </div>
-                </div>
-                <div class="flex flex-col md:flex-row gap-8" data-aos="fade-up" data-aos-delay="300">
-                    <h3 class="text-2xl font-bold text-primary md:w-1/3">Научные статьи</h3>
-                    <div class="md:w-2/3">
-                        <p class="text-gray-700 mb-4">Разработка научных статей для публикации в журналах.</p>
-                        <a href="contact.html" class="text-primary font-medium hover:underline">Заказать статью</a>
-                    </div>
-                </div>
-            </div>
+  <!-- Hero Content -->
+  <main class="relative z-10 flex flex-col items-center justify-center min-h-screen">
+    <div class="text-center px-4 mt-8">
+      <h1 class="sm:text-7xl md:text-8xl bg-clip-text transition-all duration-300 text-5xl font-extrabold text-transparent tracking-tight bg-gradient-to-r from-white via-fuchsia-200 to-sky-200 py-4 drop-shadow-2xl">
+        Frontend разработчик
+      </h1>
+      <p class="mt-6 max-w-xl mx-auto text-lg sm:text-2xl text-gray-200/90 font-medium drop-shadow-lg">
+        Я создаю современные и функциональные веб-приложения с использованием React и TypeScript, используя современные технологии и лучшие практики разработки.
+      </p>
+      <div class="mt-10 flex justify-center">
+        <div class="backdrop-blur-md bg-white/10 border border-white/15 shadow-2xl rounded-2xl px-8 py-8 flex flex-col gap-5 items-center w-full max-w-sm transition-all duration-300 hover:bg-white/20 hover:shadow-3xl">
+          <div class="">
+            <h2 class="text-2xl font-semibold text-white mb-1 pb-2">Свяжитесь сейчас</h2>
+          <span class="text-base text-white/70 mb-2 py-2">Получите разные функции и возможности сразу</span>
+          </div>
+          <a href="#projects" class="w-full inline-block bg-gradient-to-tr from-fuchsia-400 via-cyan-300 to-lime-200 text-black font-bold text-lg px-7 py-3 rounded-xl shadow-lg hover:from-fuchsia-300 hover:to-lime-100 hover:scale-105 transition-all duration-200 ring-2 ring-white/30 ring-inset text-center">
+            Посмотреть работы
+          </a>
+          <a href="#contact" class="w-full inline-block text-white/90 font-semibold px-6 py-2 rounded-xl border border-white/20 mt-1 hover:bg-white/20 transition-all duration-150 text-center">
+            Связаться
+          </a>
+          <span class="text-xs text-white/70 tracking-wide">
+            ✦ xf1st ✦
+          </span>
         </div>
-    </section>
-    <!-- Цены -->
-    <section class="py-24 bg-[#f9f7f4]">
-        <div class="container mx-auto px-4">
-          <h2 class="text-4xl font-bold text-center text-[#0046d1] mb-16" data-aos="fade-up">
-            Цены на академические работы
-          </h2>
-      
-          <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <!-- Диплом -->
-            <div
-              class="bg-white p-8 rounded-[24px] shadow-lg transition-transform hover:scale-105 hover:shadow-2xl"
-              data-aos="fade-up"
-            >
-              <h3 class="text-2xl font-bold text-[#0046d1] mb-1">Диплом</h3>
-              <p class="text-lg font-normal text-[#0046d1] mb-6">20.000 ₽</p>
-              <ul class="space-y-3 text-[#003297] font-light">
-                <li class="flex items-start">
-                  <i class="ri-checkbox-circle-fill text-[#0046d1] text-base mr-2 mt-1"></i>
-                  <span>Пояснительная записка + сайт</span>
-                </li>
-                <li class="flex items-start">
-                  <i class="ri-checkbox-circle-fill text-[#0046d1] text-base mr-2 mt-1"></i>
-                  <span>Редактирование</span>
-                </li>
-                <li class="flex items-start">
-                  <i class="ri-checkbox-circle-fill text-[#0046d1] text-base mr-2 mt-1"></i>
-                  <span>Уведомления о статусах заявок</span>
-                </li>
-                <li class="flex items-start">
-                  <i class="ri-checkbox-circle-fill text-[#0046d1] text-base mr-2 mt-1"></i>
-                  <span>Загрузка документов</span>
-                </li>
-              </ul>
+      </div>
+    </div>
+  </main>
+
+  <!-- Featured -->
+   <section id="projects" class="max-w-6xl mx-auto py-24 px-6">
+    <div class="flex items-center gap-3 mb-8 animate-on-scroll">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="code" class="lucide lucide-code w-4 h-4 text-violet-400"></svg>
+      <h2 class="text-xl font-medium text-white">Избранные проекты</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-on-scroll">
+      <div class="glass-card rounded-2xl p-6 text-left">
+          <div class="project-image rounded-xl h-32 mb-4 flex items-center justify-center">
+            <a href="https://lapseless.ru/" class="w-full h-full rounded-xl">
+              <img src="https://durka.lol/bpBgWDm" alt="LapseLess React приложение" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+            </a>
+          </div>
+          <h3 class="text-lg font-medium text-white mb-2 geist-font">LapseLess приложение</h3>
+          <p class="text-gray-300 text-sm inter-font mb-4">Веб-приложение на React с функцией отслеживания и анализа времени привычек.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">React</span>
+            <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">TypeScript</span>
+            <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">Tailwind CSS</span>
+            <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">Supabase</span>
+          </div>
+      </div>
+
+      <div class="glass-card rounded-2xl p-6 text-left">
+          <div class="project-image rounded-xl h-32 mb-4 flex items-center justify-center">
+            <a href="https://b3nz.ru/" class="w-full h-full rounded-xl">
+              <img src="https://durka.lol/iHeDTWM" alt="LapseLess React приложение" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+            </a>
+          </div>
+          <h3 class="text-lg font-medium text-white mb-2 geist-font">Магазин одежды b3nzin</h3>
+          <p class="text-gray-300 text-sm inter-font mb-4">Веб-магазин одежды с функцией добавления товаров в корзину и оформления заказа.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">React</span>
+            <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">TypeScript</span>
+            <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">shadcn/ui</span>
+          </div>
+      </div>
+
+      <div class="glass-card rounded-2xl p-6 text-left">
+          <div class="project-image rounded-xl h-32 mb-4 flex items-center justify-center">
+            <a href="https://dnstodns.ru/" class="w-full h-full rounded-xl">
+              <img src="https://durka.lol/Rg0OKIr" alt="dnstodns.ru" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+            </a>  
+          </div>
+          <h3 class="text-lg font-medium text-white mb-2 geist-font">Промо сайт для магазина DNS</h3>
+          <p class="text-gray-300 text-sm inter-font mb-4">Сайт для продвижения магазина DNS и мой дипломный проект.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">Lovable</span>
+            <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">React</span>
+            <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">TypeScript</span>
+            <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">Tailwind CSS</span>
+            <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">Framer Motion</span>
+          </div>
+      </div>
+    </div>
+    <div class="divider mb-16"></div>
+   </section>
+   <div class="w-full h-px bg-gradient-to-r from-transparent via-white/10 mb-8"></div>
+  <!-- About -->
+  <section id="about" class="max-w-4xl mx-auto py-24 px-6">
+    <div class="flex items-center gap-3 mb-8 animate-on-scroll">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="user" class="lucide lucide-user w-5 h-5 text-violet-400"></svg>
+      <h2 class="text-xl font-medium text-white">Обо мне</h2>
+    </div>
+    <p class="text-gray-300 mb-12 leading-relaxed animate-on-scroll">
+      Я frontend разработчик с опытом работы 0+ лет в создании интуитивно понятных интерфейсов. 
+      Я специализируюсь на React, TypeScript, HTML, CSS, JS и современных веб-технологиях, с акцентом на производительность и доступность.
+    </p>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Skills -->
+      <div class="glass-card p-6 rounded-xl animate-on-scroll">
+        <div class="flex items-center gap-2 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="code" class="lucide lucide-code w-4 h-4 text-violet-400"></svg>
+          <h3 class="font-medium text-white">Навыки</h3>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">React</span>
+          <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">TypeScript</span>
+          <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">HTML</span>
+          <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">CSS</span>
+          <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">JS</span>
+          <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">Tailwind</span>
+          <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">GitHub</span>
+          <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">Figma</span>
+          <span class="glass-border px-3 py-1 rounded-md text-xs text-gray-300">Supabase</span>
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div class="glass-card p-6 rounded-xl animate-on-scroll">
+        <div class="flex items-center gap-2 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="activity" class="lucide lucide-activity w-4 h-4 text-violet-400"></svg>
+          <h3 class="font-medium text-white">Статус</h3>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-gray-300">Доступен для работы</span>
+          <label class="custom-toggle cursor-pointer">
+            <input type="checkbox" class="sr-only" checked="">
+            <div class="toggle-bg w-8 h-5 rounded-full bg-gray-700 relative transition-colors">
+              <div class="toggle-dot w-3 h-3 bg-gray-400 rounded-full absolute top-1 left-1 transition-transform"></div>
             </div>
+          </label>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="w-full h-px bg-gradient-to-r from-transparent via-white/10 mb-8"></div>
+  <!-- Projects -->
+  <section id="projects" class="py-24">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="flex items-center gap-3 mb-12 animate-on-scroll">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="folder" class="lucide lucide-folder w-5 h-5 text-violet-400"></svg>
+        <h2 class="text-xl font-medium text-white">Проекты</h2>
+      </div>
       
-            <!-- Курсовая -->
-            <div
-              class="bg-[#030637] p-8 rounded-[24px] text-white shadow-lg transition-transform hover:scale-105 hover:shadow-2xl"
-              data-aos="fade-up"
-              data-aos-delay="100"
-            >
-              <h3 class="text-2xl font-bold mb-1 text-[#E8E2FB]" >Курсовая работа</h3>
-              <p class="text-lg font-normal mb-6">5.000 ₽</p>
-              <ul class="space-y-3 text-white font-light">
-                <li class="flex items-start">
-                  <i class="ri-checkbox-circle-fill text-white text-base mr-2 mt-1"></i>
-                  <span>Курсовая работа</span>
-                </li>
-                <li class="flex items-start">
-                  <i class="ri-checkbox-circle-fill text-white text-base mr-2 mt-1"></i>
-                  <span>Общение между клиентами и исполнителями</span>
-                </li>
-                <li class="flex items-start">
-                  <i class="ri-checkbox-circle-fill text-white text-base mr-2 mt-1"></i>
-                  <span>Уведомления о статусах заявок</span>
-                </li>
-                <li class="flex items-start">
-                  <i class="ri-checkbox-circle-fill text-white text-base mr-2 mt-1"></i>
-                  <span>Загрузка документов</span>
-                </li>
-              </ul>
+      <div class="space-y-6">
+        <!-- Project 1 -->
+        <div class="glass-card p-6 rounded-xl hover:bg-white/5 transition-all group animate-on-scroll">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <h3 class="font-medium text-white mb-1">Промо xf1st.ru</h3>
+              <p class="text-sm text-gray-400">Сайт на котором мы сейчас находимся</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <a href="https://xf1st.ru" class="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="external-link" class="lucide lucide-external-link w-4 h-4 text-gray-400"></svg>
+              </a>
+              <a href="https://github.com/xf1st?tab=repositories" class="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="github" class="lucide lucide-github w-4 h-4 text-gray-400"></svg>
+              </a>
             </div>
           </div>
+          <div class="flex gap-2">
+            <span class="text-xs text-violet-400 bg-violet-400/10 px-2 py-1 rounded">HTML</span>
+            <span class="text-xs text-blue-400 bg-blue-400/10 px-2 py-1 rounded">CSS</span>
+            <span class="text-xs text-orange-400 bg-orange-400/10 px-2 py-1 rounded">JS</span>
+          </div>
         </div>
-    </section>
-      
-    
-    <!-- Отзывы -->
-    <section class="py-16 bg-[#f9f7f4]" >
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-left text-[#00236a] mb-12" data-aos="fade-up">Обзоры</h2>
-            <div class="grid md:grid-cols-3 gap-12">
-                <div class="bg-transparent p-0 shadow-none" data-aos="fade-up" data-aos-delay="100">
-                    <div class="flex text-[#0046d1] mb-3">
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                    </div>
-                    <p class="text-[#003297] font-normal text-base mb-3">Рейтинг: 4.5 из 5.</p>
-                    <p class="text-[#003297] font-light text-base mb-4">Отличный сервис для заказа академических работ! Все выполнено в срок и на высшем уровне.</p>
-                    <p class="font-medium text-[#003297] text-base mb-3">@rbmpq</p>
-                </div>
-                <div class="bg-transparent p-0 shadow-none" data-aos="fade-up" data-aos-delay="200">
-                    <div class="flex text-[#0046d1] mb-3">
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                    </div>
-                     <p class="text-[#003297] font-normal text-base mb-3">Рейтинг: 4.5 из 5.</p>
-                    <p class="text-[#003297] font-light text-base mb-4">Пользовался услугами этого сайта несколько раз, и каждый раз оставался доволен качеством работы.</p>
-                    <p class="font-medium text-[#003297] text-base mb-3">@zxccursed</p>
-                </div>
-                <div class="bg-transparent p-0 shadow-none" data-aos="fade-up" data-aos-delay="300">
-                    <div class="flex text-[#0046d1] mb-3">
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                        <i class="ri-star-fill"></i>
-                    </div>
-                    <p class="text-[#003297] font-normal text-base mb-3">Рейтинг: 4.5 из 5.</p>
-                    <p class="text-[#003297] font-light text-base mb-4">Очень удобно общаться с исполнителями и отслеживать статус заказа в личном кабинете. Рекомендую!</p>
-                    <p class="font-medium text-[#003297] text-base mb-3">@babylowwer322</p>
-                </div>
+
+        <!-- Project 2 -->
+        <div class="glass-card p-6 rounded-xl hover:bg-white/5 transition-all group animate-on-scroll">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <h3 class="font-medium text-white mb-1">Донатная страница</h3>
+              <p class="text-sm text-gray-400">Страница на которой можно мне донатить</p>
             </div>
+            <div class="flex items-center gap-2">
+              <a href="https://xf1st.ru/donate" class="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="external-link" class="lucide lucide-external-link w-4 h-4 text-gray-400"></svg>
+              </a>
+              <a href="https://github.com/xf1st?tab=repositories" class="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="github" class="lucide lucide-github w-4 h-4 text-gray-400"></svg>
+              </a>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <span class="text-xs text-violet-400 bg-violet-400/10 px-2 py-1 rounded">HTML</span>
+            <span class="text-xs text-blue-400 bg-blue-400/10 px-2 py-1 rounded">CSS</span>
+            <span class="text-xs text-orange-400 bg-orange-400/10 px-2 py-1 rounded">JS</span>
+          </div>
         </div>
-    </section>
-    <!-- Контактная форма -->
-    <section id="contact" class="py-24 bg-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-[#0046d1] mb-8" data-aos="fade-up">Свяжитесь с нами</h2>
-            <div class="max-w-2xl mx-auto">
-                <p class="text-center text-gray-600 font-light text-base mb-10" data-aos="fade-up" data-aos-delay="100">Хотите начать? Отправьте запрос или закажите работу через контактную форму. Наша команда готова ответить на ваши вопросы.</p>
-                <form class="space-y-6" action="https://docs.google.com/forms/d/e/1FAIpQLSeyRveJiSkIVaFoV_HIl_cOS4It2Db97A_y5MR5isvm0CIP3Q/formResponse" method="POST" >
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div data-aos="fade-right" data-aos-delay="200">
-                            <input type="text" placeholder="Как вас зовут?" name="entry.2103735898"
-                                class="w-full px-4 py-3 border border-gray-600 focus:outline-none focus:ring-0 focus:border-blue-500 focus:shadow-md hover:border-gray-700 rounded-md text-sm transition duration-300 ease-in-out">
-                        </div>
-                        <div data-aos="fade-left" data-aos-delay="300">
-                            <input type="email" placeholder="Ваш email?" name="entry.2016228396"
-                                class="w-full px-4 py-3 border border-gray-600 focus:outline-none focus:ring-0 focus:border-blue-500 focus:shadow-md hover:border-gray-700 rounded-md text-sm transition duration-300 ease-in-out">
-                        </div>
-                    </div>
-                    <div data-aos="fade-up" data-aos-delay="400">
-                        <textarea placeholder="Что вы хотите сказать?" rows="5" name="entry.954100367"
-                            class="w-full px-4 py-3 border border-gray-600 focus:outline-none focus:ring-0 focus:border-blue-500 focus:shadow-md hover:border-gray-700 rounded-md text-sm transition duration-300 ease-in-out"></textarea>
-                    </div>
-                    <div class="text-center" data-aos="zoom-in-up" data-aos-delay="500">
-                      <button type="submit"
-                        class="bg-[#3b82f6] text-white px-8 py-3 rounded-md font-medium hover:bg-[#2563eb] hover:shadow-lg transform hover:-translate-y-1 active:translate-y-0 active:shadow-none transition duration-300 ease-in-out whitespace-nowrap text-base">Отправить запрос</button>
-                    </div>
-                </form>
+
+        <!-- Project 3 -->
+        <div class="glass-card p-6 rounded-xl hover:bg-white/5 transition-all group animate-on-scroll">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <h3 class="font-medium text-white mb-1">Эстетичная страница для покупки дипломных работ</h3>
+              <p class="text-sm text-gray-400">Современный опыт покупки с плавными анимациями</p>
             </div>
+            <div class="flex items-center gap-2">
+              <a href="https://xf1st.online" class="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="external-link" class="lucide lucide-external-link w-4 h-4 text-gray-400"></svg>
+              </a>
+              <a href="https://github.com/xf1st?tab=repositories" class="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="github" class="lucide lucide-github w-4 h-4 text-gray-400"></svg>
+              </a>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <span class="text-xs text-blue-600 bg-blue-600/10 px-2 py-1 rounded">Wordpress AI</span>
+            <span class="text-xs text-green-600 bg-green-600/10 px-2 py-1 rounded">Some AI stuff</span>
+            <span class="text-xs text-violet-400 bg-violet-400/10 px-2 py-1 rounded">HTML</span>
+          </div>
         </div>
-    </section>
-    <!-- Карта -->
-    <section class="py-16 bg-[#f9f7f4]">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12" data-aos="fade-up">Посетить нас</h2>
-            <div class="flex justify-center mb-8" data-aos="fade-up" data-aos-delay="100">
-                <div class="flex space-x-4">
-                    <a href="https://t.me/xf1st" target="_blank" rel="noopener noreferrer"
-                        class="w-10 h-10 flex items-center justify-center bg-primary text-white hover:bg-primary/90 transition">
-                        <i class="ri-telegram-line"></i>
-                    </a>
-                    <a href="https://vk.com/maybeprincess" target="_blank" rel="noopener noreferrer"
-                        class="w-10 h-10 flex items-center justify-center bg-primary text-white hover:bg-primary/90 transition">
-                        <i class="ri-vk-line"></i>
-                    </a>
-                </div>
+
+        <!-- Project 4 -->
+        <div class="glass-card p-6 rounded-xl hover:bg-white/5 transition-all group animate-on-scroll">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <h3 class="font-medium text-white mb-1">LapseLess - трекер привычек</h3>
+              <p class="text-sm text-gray-400">Современный трекер привычек с акцентом на простоту</p>
             </div>
-            <div class="h-64 sm:h-80 md:h-96 overflow-hidden shadow-md" data-aos="zoom-in" data-aos-delay="200">
-                <div class="w-full h-full bg-cover bg-center">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224430.4597887876!2d37.3688773!3d55.7558498!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a6360222223%3A0x1cb346f234e1cfcf!2z0JzRj9GB0LrQuNCw0YHRgtC10YLRgdGC!5e0!3m2!1sru!2sru!4v1691988888888!5m2!1sru!2sru" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
+            <div class="flex items-center gap-2">
+              <a href="https://lapseless.ru" class="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="external-link" class="lucide lucide-external-link w-4 h-4 text-gray-400"></svg>
+              </a>
+              <a href="https://github.com/xf1st?tab=repositories" class="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="github" class="lucide lucide-github w-4 h-4 text-gray-400"></svg>
+              </a>
             </div>
+          </div>
+          <div class="flex gap-2">
+            <span class="text-xs text-red-400 bg-red-400/10 px-2 py-1 rounded">React</span>
+            <span class="text-xs text-cyan-400 bg-cyan-400/10 px-2 py-1 rounded">Tailwind CSS</span>
+            <span class="text-xs text-blue-400 bg-blue-400/10 px-2 py-1 rounded">TypeScript</span>
+            <span class="text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded">Supabase</span>
+          </div>
         </div>
-    </section>
-    <!-- Подвал -->
-    <footer class="bg-white py-20">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-3 gap-10">
-                <div data-aos="fade-up" data-aos-delay="100" class="text-center">
-                    <h3 class="text-2xl font-bold mb-6 text-[#0046d1]">Диплом</h3>
-                    <p class="mb-3 text-[#003297] font-light text-base">
-                        <a href="https://maps.google.com/?q=140960,Москва" class="link-hover phone-mask">140960, Москва,</a>
-                    </p>
-                    <p class="text-[#003297] font-light text-base">
-                        <a href="https://maps.google.com/?q=140960,Москва" class="link-hover">Москва</a>
-                    </p>
-                </div>
-                <div data-aos="fade-up" data-aos-delay="200" class="text-center">
-                    <h3 class="text-2xl font-bold mb-6 text-[#0046d1]">Время</h3>
-                    <p class="mb-3 text-[#003297] font-light text-base">Понедельник — Пятница</p>
-                    <p class="text-[#003297] font-light text-base">С 8:00 до 22:00</p>
-                </div>
-                <div data-aos="fade-up" data-aos-delay="300" class="text-center">
-                    <h3 class="text-2xl font-bold mb-6 text-[#0046d1]">Контакт</h3>
-                    <p class="mb-3 text-[#003297] font-light text-base">
-                        <a href="mailto:crybabyfckk@gmail.com" class="link-hover">xf1stads@gmail.com</a>
-                    </p>
-                    <p class="text-[#003297] font-light text-base">
-                        <a href="tel:+79009009090" class="link-hover phone-mask">(900) 900-90-90</a>
-                    </p>
-                </div>
+
+        <!-- Project 5 -->
+        <div class="glass-card p-6 rounded-xl hover:bg-white/5 transition-all group animate-on-scroll">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <h3 class="font-medium text-white mb-1">DnsToDns - промо сайт</h3>
+              <p class="text-sm text-gray-400">Промо сайт для магазина Dns</p>
             </div>
-            <div class="mt-16 pt-0 text-center" data-aos="fade-up" data-aos-delay="400">
-                <p class="text-[#003297] font-light text-sm">Designed by xf1st</p>
+            <div class="flex items-center gap-2">
+              <a href="https://dnstodns.ru" class="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="external-link" class="lucide lucide-external-link w-4 h-4 text-gray-400"></svg>
+              </a>
+              <a href="https://github.com/xf1st?tab=repositories" class="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="github" class="lucide lucide-github w-4 h-4 text-gray-400"></svg>
+              </a>
             </div>
+          </div>
+          <div class="flex gap-2">
+            <span class="text-xs text-red-400 bg-red-400/10 px-2 py-1 rounded">React</span>
+            <span class="text-xs text-cyan-400 bg-cyan-400/10 px-2 py-1 rounded">Tailwind CSS</span>
+            <span class="text-xs text-blue-400 bg-blue-400/10 px-2 py-1 rounded">TypeScript</span>
+            <span class="text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded">Supabase</span>
+            <span class="text-xs text-pink-400 bg-pink-400/10 px-2 py-1 rounded">Lovable</span>
+            <span class="text-xs text-blue-400 bg-blue-400/10 px-2 py-1 rounded">Figma</span>
+          </div>
         </div>
-    </footer>
-    <!-- Хлебные крошки -->
-    <div class="bg-gray-100 py-2">
-        <div class="container mx-auto px-4">
-            <nav class="text-sm" aria-label="Хлебные крошки">
-                <ol class="flex items-center space-x-2">
-                    <li class="flex items-center">
-                        <a href="#" class="text-primary hover:text-primary/80">Главная</a>
-                        <i class="ri-arrow-right-s-line mx-2 text-gray-400"></i>
-                    </li>
-                    <li class="text-gray-600" aria-current="page">Академический сервис</li>
-                </ol>
-            </nav>
+
+        <!-- Project 6 -->
+        <div class="glass-card p-6 rounded-xl hover:bg-white/5 transition-all group animate-on-scroll">
+          <div class="flex items-start justify-between mb-4">
+            <div>
+              <h3 class="font-medium text-white mb-1">b3nz - магазин модной одежды</h3>
+              <p class="text-sm text-gray-400">Современный дизайн сайта с использованием некоторых готовых компонентов и некоторых компонентов, которые я написал сам</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <a href="https://b3nz.ru" class="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="external-link" class="lucide lucide-external-link w-4 h-4 text-gray-400"></svg>
+              </a>
+              <a href="https://github.com/xf1st?tab=repositories" class="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="github" class="lucide lucide-github w-4 h-4 text-gray-400"></svg>
+              </a>
+            </div>
+          </div>
+          <div class="flex gap-2">
+            <span class="text-xs text-red-400 bg-red-400/10 px-2 py-1 rounded">React</span>
+            <span class="text-xs text-cyan-400 bg-cyan-400/10 px-2 py-1 rounded">Tailwind CSS</span>
+            <span class="text-xs text-blue-400 bg-blue-400/10 px-2 py-1 rounded">TypeScript</span>
+            <span class="text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded">Supabase</span>
+          </div>
         </div>
+
+      <!-- Project 7 -->
+      <div class="glass-card p-6 rounded-xl hover:bg-white/5 transition-all group animate-on-scroll">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <h3 class="font-medium text-white mb-1">И другие сайты</h3>
+            <p class="text-sm text-gray-400">И прочие описания</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <a href="#" class="p-2 hover:bg-white/10 rounded-lg transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="external-link" class="lucide lucide-external-link w-4 h-4 text-gray-400"></svg>
+            </a>
+            <a href="https://github.com/xf1st?tab=repositories" class="p-2 hover:bg-white/10 rounded-lg transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="github" class="lucide lucide-github w-4 h-4 text-gray-400"></svg>
+            </a>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-xs text-red-400 bg-red-400/10 px-2 py-1 rounded">React</span>
+          <span class="text-xs text-cyan-400 bg-cyan-400/10 px-2 py-1 rounded">Tailwind CSS</span>
+          <span class="text-xs text-blue-400 bg-blue-400/10 px-2 py-1 rounded">TypeScript</span>
+          <span class="text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded">Supabase</span>
+          <span class="text-xs text-violet-400 bg-violet-400/10 px-2 py-1 rounded">HTML</span>
+          <span class="text-xs text-blue-400 bg-blue-400/10 px-2 py-1 rounded">CSS</span>
+          <span class="text-xs text-pink-400 bg-pink-400/10 px-2 py-1 rounded">Figma</span>
+          <span class="text-xs text-pink-400 bg-pink-400/10 px-2 py-1 rounded">Lovable</span>
+          <span class="text-xs text-white-400 bg-blue-400/10 px-2 py-1 rounded">aurachat.io</span>
+        </div>
+      </div>
+      </div>
     </div>
+  </section>
 
-    <!-- Кнопка "Наверх" -->
-    <button id="scrollToTop" class="fixed bottom-8 right-8 bg-primary text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-primary/90" title="Наверх">
-        <i class="ri-arrow-up-line ri-xl"></i>
-    </button>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script>
-      AOS.init({
-        duration: 800,
-        once: true
-      });
-
-      function showToast(message, type = 'success') {
-          const toast = Toastify({
-              text: message,
-              duration: 5000,
-              gravity: "top",
-              position: "right",
-              style: {
-                  background: "linear-gradient(to right, #00236a, #002f8f)",
-                  borderRadius: "0",
-                  boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
-              },
-              onClick: function() {
-                  toast.hideToast();
-              }
-          });
-
-          const closeButton = document.createElement('span');
-          closeButton.className = 'toast-close';
-          closeButton.innerHTML = '<i class="ri-close-line"></i>';
-          closeButton.onclick = function(e) {
-              e.stopPropagation();
-              toast.hideToast();
-          };
-
-          toast.showToast();
-          const toastElement = document.querySelector('.toastify:last-child');
-          if (toastElement) {
-              toastElement.appendChild(closeButton);
-          }
-      }
-
-      document.addEventListener('DOMContentLoaded', function() {
-          const forms = document.querySelectorAll('form');
-          forms.forEach(form => {
-              form.addEventListener('submit', function(e) {
-                  e.preventDefault();
-                  showToast("Ваше сообщение отправлено! Мы свяжемся с вами в ближайшее время.");
-                  setTimeout(() => form.submit(), 2000);
-              });
-          });
-
-          const socialButtons = document.querySelectorAll('a[target="_blank"]');
-          socialButtons.forEach(button => {
-              button.addEventListener('click', function(e) {
-                  e.preventDefault();
-                  const href = this.getAttribute('href');
-                  showToast("Открываем ссылку в новом окне...");
-                  setTimeout(() => window.open(href, '_blank'), 500);
-              });
-          });
-
-          const contactLinks = document.querySelectorAll('.contact-link');
-          contactLinks.forEach(link => {
-              link.addEventListener('click', function(e) {
-                  e.preventDefault();
-                  const href = this.getAttribute('href');
-                  if (href.startsWith('mailto:')) {
-                      showToast("Открываем почтовый клиент...");
-                  } else if (href.startsWith('tel:')) {
-                      showToast("Начинаем звонок...");
-                  }
-                  setTimeout(() => window.location.href = href, 500);
-              });
-          });
-      });
-
-      document.addEventListener('DOMContentLoaded', function () {
-          const menuButton = document.getElementById('mobile-menu-button');
-          const mobileMenu = document.getElementById('mobile-menu');
-          const menuIcon = menuButton ? menuButton.querySelector('i') : null;
-
-          if (menuButton && mobileMenu && menuIcon) {
-              menuButton.addEventListener('click', () => {
-                  const isHidden = mobileMenu.classList.toggle('hidden');
-                  
-                  if (!isHidden) {
-                      menuIcon.classList.remove('ri-menu-line');
-                      menuIcon.classList.add('ri-close-line');
-                  } else {
-                      menuIcon.classList.remove('ri-close-line');
-                      menuIcon.classList.add('ri-menu-line');
-                  }
-              });
-
-              const mobileLinks = mobileMenu.querySelectorAll('a');
-              mobileLinks.forEach(link => {
-                  link.addEventListener('click', () => {
-                      mobileMenu.classList.add('hidden'); 
-                      menuIcon.classList.remove('ri-close-line');
-                      menuIcon.classList.add('ri-menu-line');
-                  });
-              });
-          }
-      });
-
-      // Плавная прокрутка к якорям
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-          anchor.addEventListener('click', function (e) {
-              e.preventDefault();
-              const target = document.querySelector(this.getAttribute('href'));
-              if (target) {
-                  target.scrollIntoView({
-                      behavior: 'smooth',
-                      block: 'start'
-                  });
-              }
-          });
-      });
-
-      // Кнопка "Наверх"
-      const scrollToTopButton = document.getElementById('scrollToTop');
+  <!-- Contact -->
+  <section id="contact" class="bg-neutral-950 pt-24 pb-24">
+    <div class="max-w-lg mx-auto px-6">
+      <div class="flex items-center gap-3 mb-8 animate-on-scroll">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="mail" class="lucide lucide-mail w-5 h-5 text-violet-400"></svg>
+        <h2 class="text-xl font-medium text-white">Свяжитесь со мной</h2>
+      </div>
       
-      window.addEventListener('scroll', () => {
-          if (window.pageYOffset > 300) {
-              scrollToTopButton.classList.remove('opacity-0', 'invisible');
-              scrollToTopButton.classList.add('opacity-100', 'visible');
-          } else {
-              scrollToTopButton.classList.add('opacity-0', 'invisible');
-              scrollToTopButton.classList.remove('opacity-100', 'visible');
-          }
+      <form class="space-y-6" action="https://formspree.io/f/xanqaldv" method="POST">
+        <div class="animate-on-scroll">
+          <label class="block text-sm text-gray-300 mb-2">Имя</label>
+          <input type="text" class="w-full px-4 py-3 rounded-lg glass-input text-white placeholder-gray-500 focus:outline-none transition-all" placeholder="Ваше имя" name="name">
+        </div>
+        
+        <div class="animate-on-scroll">
+          <label class="block text-sm text-gray-300 mb-2">Email</label>
+          <input type="email" class="w-full px-4 py-3 rounded-lg glass-input text-white placeholder-gray-500 focus:outline-none transition-all" placeholder="Ваш email" name="email">
+        </div>
+        
+        <div class="animate-on-scroll">
+          <label class="block text-sm text-gray-300 mb-2">Сообщение</label>
+          <textarea rows="4" class="w-full px-4 py-3 rounded-lg glass-input text-white placeholder-gray-500 focus:outline-none transition-all resize-none" placeholder="Расскажите мне о вашем проекте" name="message"></textarea>
+        </div>
+
+        <button type="submit" class="w-full glass-border px-6 py-3 rounded-lg font-medium hover:bg-white/5 transition-all flex items-center justify-center gap-2 animate-on-scroll">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="send" class="lucide lucide-send w-4 h-4"></svg>
+          Отправить сообщение
+        </button>
+      </form>
+      
+      <div class="flex justify-center gap-6 mt-12 animate-on-scroll">
+        <a href="https://github.com/xf1st" class="p-3 hover:bg-white/5 rounded-lg transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="github" class="lucide lucide-github w-5 h-5 text-gray-400"></svg>
+        </a>
+        <a href="https://t.me/xf1st" class="p-3 hover:bg-white/5 rounded-lg transition-colors">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="message-circle" class="lucide lucide-message-circle w-5 h-5 text-gray-400"></svg>
+        </a>
+        <a href="https://kwork.ru/user/xf1st" class="p-3 hover:bg-white/5 rounded-lg transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="briefcase-business" class="lucide lucide-briefcase-business w-5 h-5 text-gray-400"></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+    <!-- Footer -->
+    <footer class="text-center bg-neutral-950 pt-8 pb-8">
+      <div class="w-full h-px bg-gradient-to-r from-transparent via-white/10 mb-8"></div>
+      <p class="text-sm text-white/50">&copy; 2025 xf1st. Все права защищены.</p>
+    </footer>
+
+  <script>
+    lucide.createIcons();
+    
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        }
       });
+    }, observerOptions);
 
-      scrollToTopButton.addEventListener('click', () => {
-          window.scrollTo({
-              top: 0,
-              behavior: 'smooth'
-          });
-      });
+    // Observe all elements with animate-on-scroll class
+    document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+      observer.observe(el);
+    });
+  </script>
 
-      // Ленивая загрузка изображений
-      document.addEventListener('DOMContentLoaded', function() {
-          const lazyImages = document.querySelectorAll('img[data-src]');
-          
-          const imageObserver = new IntersectionObserver((entries, observer) => {
-              entries.forEach(entry => {
-                  if (entry.isIntersecting) {
-                      const img = entry.target;
-                      img.src = img.dataset.src;
-                      img.removeAttribute('data-src');
-                      observer.unobserve(img);
-                  }
-              });
-          });
-
-          lazyImages.forEach(img => imageObserver.observe(img));
-      });
-
-      // Обработка кликов по контактной информации
-      document.addEventListener('DOMContentLoaded', function() {
-          // Обработка клика по адресу
-          const addressLinks = document.querySelectorAll('a[href*="maps.google.com"]');
-          addressLinks.forEach(link => {
-              link.addEventListener('click', function(e) {
-                  e.preventDefault();
-                  const address = this.getAttribute('href').split('q=')[1];
-                  window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`, '_blank');
-              });
-          });
-
-          // Обработка клика по телефону
-          const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
-          phoneLinks.forEach(link => {
-              link.addEventListener('click', function(e) {
-                  e.preventDefault();
-                  const phone = this.getAttribute('href').replace('tel:', '');
-                  window.open(`tel:${phone}`, '_self');
-              });
-          });
-
-          // Обработка клика по email
-          const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
-          emailLinks.forEach(link => {
-              link.addEventListener('click', function(e) {
-                  e.preventDefault();
-                  const email = this.getAttribute('href').replace('mailto:', '');
-                  window.open(`mailto:${email}`, '_self');
-              });
-          });
-      });
-    </script>
-</body>
-
-</html>
+</body></html>
