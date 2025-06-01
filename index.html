@@ -486,15 +486,56 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="activity" class="lucide lucide-activity w-4 h-4 text-violet-400"></svg>
           <h3 class="font-medium text-white">Статус</h3>
         </div>
-        <div class="flex items-center justify-between">
-          <span class="text-sm text-gray-300">Доступен для работы</span>
-          <label class="custom-toggle cursor-pointer">
-            <input type="checkbox" class="sr-only" checked="">
-            <div class="toggle-bg w-8 h-5 rounded-full bg-gray-700 relative transition-colors">
-              <div class="toggle-dot w-3 h-3 bg-gray-400 rounded-full absolute top-1 left-1 transition-transform"></div>
+        <div class="relative">
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-gray-300">Доступен для работы:</span>
+            <span class="text-sm text-red-500">Нет</span>
+            <button id="toggleDrawer" class="glass-card px-4 py-2 rounded-lg text-white hover:bg-gray-800 transition-colors">Подробнее</button>
+          </div>
+          <div class="absolute right-0 top-12 w-64 bg-gray-800 rounded-lg shadow-lg p-4 opacity-0 invisible transition-all duration-300 ease-out transform translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0">
+            <div class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-400">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+              <div>
+                <p class="text-sm text-white">В армии до июня 2026 года</p>
+                <p class="text-xs text-gray-400 mt-1">Вернусь к работе после службы</p>
+              </div>
             </div>
-          </label>
-        </div>
+          </div>
+
+          <!-- Drawer снизу -->
+          <div id="drawer" class="fixed bottom-20 left-4 right-4 max-w-2xl mx-auto bg-gray-900 rounded-t-xl shadow-xl p-8 z-50 transform scale-95 opacity-0 transition-all duration-300 ease-out">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-medium text-white">Статус</h3>
+              <button id="closeDrawer" class="text-gray-400 hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="space-y-4">
+              <div class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-400">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <div>
+                  <p class="text-white">В армии до июня 2026 года</p>
+                  <p class="text-sm text-gray-400">Вернусь к работе после службы</p>
+                </div>
+              </div>
+              <div class="text-gray-400">
+                <p>В данный момент я прохожу военную службу, но планирую вернуться к работе в сфере веб-разработки после её окончания.</p>
+                <p class="mt-2">Если у вас есть интересные проекты, вы можете связаться со мной, и я с удовольствием обсуду их после возвращения из армии.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Overlay для затемнения фона -->
+          <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+          </div>
+        </div>  
       </div>
     </div>
   </section>
@@ -748,4 +789,38 @@
     });
   </script>
 
-</body></html>
+  <script>
+    const toggleBtn = document.getElementById('toggleDrawer');
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('overlay');
+    const closeBtn = document.getElementById('closeDrawer');
+
+    // Показываем drawer при нажатии на кнопку
+    toggleBtn.addEventListener('click', () => {
+      drawer.classList.remove('hidden');
+      drawer.style.opacity = '1';
+      drawer.style.transform = 'scale(1)';
+      overlay.classList.remove('hidden');
+    });
+
+    // Скрываем drawer при нажатии на крестик или overlay
+    closeBtn.addEventListener('click', () => {
+      drawer.style.opacity = '0';
+      drawer.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        drawer.classList.add('hidden');
+      }, 300);
+      overlay.classList.add('hidden');
+    });
+
+    overlay.addEventListener('click', () => {
+      drawer.style.opacity = '0';
+      drawer.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        drawer.classList.add('hidden');
+      }, 300);
+      overlay.classList.add('hidden');
+    });
+  </script>
+  </body>
+</html>
