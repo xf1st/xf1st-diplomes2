@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Погода на улице</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@lucide/web/dist/lucide.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script> 
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+
+        @keyframes rain {
+            0% { transform: translateY(0); opacity: 0; }
+            10% { opacity: 1; }
+            95% { opacity: 1; }
+            100% { transform: translateY(calc(100vh + 100px)); opacity: 0; }
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .details-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .details-expanded {
+            max-height: 500px;
+        }
+        
+        .weather-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        
+        .weather-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .suggestions {
+            position: absolute;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 8px;
+            margin-top: 8px;
+            z-index: 10;
+        }
+
+        .suggestion-item {
+            padding: 8px 12px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .suggestion-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-800 min-h-screen">
+    <header class="text-white text-2xl font-bold p-4">
+        <h1 class="text-center">Погода на улице</h1>
+        <nav class="flex justify-center">
+            <ul>
+                <li><a href="../index.html" class="mr-4 text-white hover:text-blue-400 transition-colors flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="hammer" class="lucide lucide-hammer w-6 h-6 text-white group-hover:text-green-400 transition-colors duration-300"></svg> Тулзы</a></li>
+                <li><a href="http://Xf1st.ru" class="mr-4 text-white hover:text-blue-400 transition-colors flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="home" class="lucide lucide-qr-code w-6 h-6 text-white group-hover:text-green-400 transition-colors duration-300"></svg> Главная</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-md mx-auto">
+            <div class="weather-card rounded-xl p-6">
+                <!-- Header with Search -->
+                <div class="mb-6">
+                    <div class="relative">
+                        <input type="text" id="cityInput" 
+                               class="w-full bg-transparent border-b border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-blue-400 transition-colors"
+                               placeholder="Введите название города...">
+                        <button onclick="getWeather()" 
+                                class="absolute right-0 top-1/2 -translate-y-1/2 px-4 py-2 bg-blue-500/20 hover:bg-blue-500/30 text-white rounded-full transition-colors">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <div id="suggestions" class="suggestions hidden"></div>
+                </div>
+                
+                <!-- Weather Card -->
+                <div id="weatherInfo" class="hidden">
+                    <!-- Current Weather -->
+                    <div class="mb-8">
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="flex items-center gap-2">
+                                <div class="weather-icon">
+                                    <i class="fas fa-cloud-sun text-4xl text-blue-400"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-2xl font-bold text-white" id="weatherDescription"></h2>
+                                    <p class="text-sm text-gray-400" id="weatherDate"></p>
+                                </div>
+                            </div>
+                            <div class="text-sm text-gray-400" id="cityName"></div>
+                        </div>
+                        
+                        <!-- Temperature -->
+                        <div class="text-center mb-6">
+                            <h1 class="text-6xl font-bold text-white" id="temperature"></h1>
+                            <p class="text-gray-400" id="feelsLike"></p>
+                        </div>
+                        
+                        <!-- Weather Details -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-4 rounded-lg bg-black/20">
+                                <div class="flex items-center justify-between">
+                                    <i class="fas fa-wind text-blue-400"></i>
+                                    <span class="text-white" id="windSpeed"></span>
+                                </div>
+                            </div>
+                            <div class="p-4 rounded-lg bg-black/20">
+                                <div class="flex items-center justify-between">
+                                    <i class="fas fa-droplet text-blue-400"></i>
+                                    <span class="text-white" id="humidity"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Error Message -->
+                <div id="errorMessage" class="hidden text-red-400 text-center mb-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const apiKey = '0b9b76283c17302db00f86c1dfca4656';
+        const cityInput = document.getElementById('cityInput');
+        const weatherInfo = document.getElementById('weatherInfo');
+        const errorMessage = document.getElementById('errorMessage');
+        const suggestionsContainer = document.getElementById('suggestions');
+        const knownCities = [
+    // --- Крупные города ---
+    'Москва', 'Санкт-Петербург', 'Новосибирск', 'Екатеринбург',
+    'Казань', 'Нижний Новгород', 'Челябинск', 'Самара',
+    'Омск', 'Ростов-на-Дону', 'Уфа', 'Красноярск',
+    'Воронеж', 'Пермь', 'Волгоград', 'Краснодар',
+    'Саратов', 'Тюмень', 'Тольятти', 'Ижевск',
+    'Барнаул', 'Ульяновск', 'Иркутск', 'Ярославль',
+    'Владивосток', 'Махачкала', 'Хабаровск', 'Оренбург',
+    'Новокузнецк', 'Кемерово', 'Рязань', 'Астрахань',
+    'Набережные Челны', 'Пенза', 'Липецк', 'Киров',
+    'Чебоксары', 'Тула', 'Калининград', 'Брянск',
+    'Ставрополь', 'Магнитогорск', 'Томск', 'Курск',
+    'Смоленск', 'Комсомольск-на-Амуре', 'Белгород',
+    'Нижний Тагил', 'Череповец', 'Севастополь', 'Красногорск',
+    'Тверь', 'Иваново', 'Сургут', 'Владимир',
+    'Архангельск', 'Орёл', 'Кострома', 'Стерлитамак',
+    'Сыктывкар', 'Симферополь', 'Курган', 'Петрозаводск',
+    'Ангарск', 'Бийск', 'Братск', 'Норильск',
+    'Вологда', 'Салават', 'Орск', 'Дзержинск',
+    'Южно-Сахалинск', 'Нальчик', 'Благовещенск', 'Армавир',
+    'Абакан', 'Энгельс', 'Нефтеюганск', 'Саранск',
+    'Мурманск', 'Якутск', 'Великий Новгород',
+    'Северодвинск', 'Кызыл', 'Новочеркасск', 'Новомосковск',
+    'Черкесск', 'Королёв', 'Сызрань', 'Невинномысск',
+    'Бердск', 'Прокопьевск', 'Каменск-Уральский', 'Копейск',
+    'Подольск', 'Каспийск', 'Ковров',
+    'Кисловодск', 'Керчь', 'Камышин', 'Альметьевск',
+    'Пятигорск', 'Элиста', 'Балаково', 'Димитровград',
+    'Жуковский', 'Коломна', 'Краснотурьинск', 'Краснозаводск',
+    'Краснознаменск', 'Краснокаменск', 'Краснокамск',
+    'Запрудня', 'Дмитров', 'Вербилки', 'Талдом', 'Дубна',
+
+    // --- Средние города ---
+    'Клин', 'Солнечногорск', 'Лобня', 'Долгопрудный', 'Химки',
+    'Щёлково', 'Фрязино', 'Реутов', 'Балашиха',
+    'Электросталь', 'Ногинск', 'Пушкино', 'Ивантеевка', 'Лыткарино',
+    'Люберцы', 'Железнодорожный', 'Котельники', 'Одинцово', 'Наро-Фоминск',
+    'Ступино', 'Чехов', 'Серпухов', 'Протвино', 'Обнинск', 'Калуга',
+    'Тула', 'Рязань', 'Владимир', 'Ярославль', 'Иваново', 'Кострома',
+    'Курск', 'Орёл', 'Брянск', 'Смоленск', 'Вологда', 'Архангельск',
+    'Саранск', 'Йошкар-Ола', 'Чебоксары', 'Ульяновск', 'Пенза', 'Саратов',
+    'Волгоград', 'Астрахань', 'Махачкала', 'Грозный', 'Нальчик', 'Черкесск',
+    'Новороссийск', 'Сочи', 'Таганрог', 'Шахты', 'Волгодонск', 'Сальск',
+    'Краснодар', 'Ставрополь', 'Пятигорск', 'Кисловодск', 'Невинномысск',
+    'Ессентуки', 'Георгиевск', 'Будённовск', 'Минеральные Воды', 'Нальчик',
+    'Прохладный', 'Баксан', 'Нарткала', 'Чегем', 'Майский', 'Терек',
+    'Зеленчукская', 'Армавир', 'Крымск', 'Тихорецк', 'Курганинск',
+    'Ленинградская', 'Усть-Лабинск', 'Тимашевск', 'Славянск-на-Кубани',
+    'Ейск', 'Темрюк', 'Геленджик', 'Новороссийск', 'Анапа', 'Гулькевичи',
+    'Кропоткин', 'Крымск', 'Кореновск', 'Тимашевск', 'Белореченск',
+    'Мостовской', 'Апшеронск', 'Туапсе', 'Сочи', 'Лазаревское', 'Гагра',
+    'Новый Уренгой', 'Ноябрьск', 'Салехард', 'Лабытнанги', 'Надым',
+    'Тарко-Сале', 'Муравленко', 'Полярный', 'Снежный', 'Курган',
+    'Шадринск', 'Катав-Ивановск', 'Куса', 'Кыштым', 'Миасс', 'Златоуст',
+    'Троицк', 'Копейск', 'Сатка', 'Бакал', 'Озёрск', 'Карталы',
+    'Сим', 'Красное', 'Аша', 'Чебаркуль', 'Южноуральск', 'Магнитогорск',
+    'Челябинск', 'Верхнеуральск', 'Кизиль', 'Карабаш', 'Карагай',
+    'Пласт', 'Касли', 'Аргаяш', 'Курайка', 'Курагино', 'Минусинск',
+    'Саяногорск', 'Сорск', 'Абаза', 'Таштып', 'Боград', 'Абакан',
+    'Саяногорск', 'Черногорск', 'Сорск', 'Тура', 'Бодайбо', 'Братск',
+    'Усть-Илимск', 'Байкальск', 'Слюдянка', 'Иркутск', 'Шелехов',
+    'Ангарск', 'Братск', 'Усть-Илимск', 'Бодайбо', 'Нижнеудинск',
+    'Тулун', 'Зима', 'Черемхово', 'Свирск', 'Киренск', 'Усть-Кут',
+    'Канск', 'Заиграево', 'Кяхта', 'Гусиноозёрск', 'Саган-Нур',
+    'Улан-Удэ', 'Кырен', 'Кижинга', 'Сосново-Озёрское', 'Бичура',
+    'Северобайкальск', 'Курортный', 'Приозерск', 'Высоцк', 'Ломоносов',
+    'Гатчина', 'Тосно', 'Всеволожск', 'Колпино', 'Пушкин', 'Петергоф',
+    'Ломоносов', 'Сосновый Бор', 'Сланцы', 'Кингисепп', 'Выборг',
+    'Светогорск', 'Каменногорск', 'Никольское', 'Лодейное Поле', 'Кировск',
+    'Сертолово', 'Мурманск', 'Североморск', 'Апатиты', 'Кировск',
+    'Оленегорск', 'Кандалакша', 'Полярный', 'Снежногорск', 'Кола',
+    'Мончегорск', 'Корсаков', 'Южно-Сахалинск', 'Холмск', 'Невельск',
+    'Томари', 'Анива', 'Курильск', 'Смирных', 'Оха', 'Ноглики',
+    'Шахтёрск', 'Поронайск', 'Тымовское', 'Свободный', 'Благовещенск',
+    'Шимановск', 'Зея', 'Райчихинск', 'Свободный', 'Белогорск',
+    'Тында', 'Нерюнгри', 'Мирный', 'Алдан', 'Удачный',
+    'Нюрба', 'Вилюйск', 'Ленск', 'Олёкминск', 'Сангар', 'Томмот',
+    'Амга', 'Нижний Бестях', 'Магадан', 'Сусуман', 'Ягодное',
+    'Ола', 'Омсукчан', 'Среднекан', 'Усть-Омчак', 'Чукотка',
+    'Анадырь', 'Певек', 'Билибино', 'Палана', 'Тигиль',
+    'Озерновский', 'Ключи', 'Камчатск', 'Петропавловск-Камчатский',
+    'Елизово', 'Вилючинск', 'Нововулканск', 'Мильково', 'Усть-Камчатск',
+    'Октябрьский', 'Козыревск', 'Кировское', 'Опорное', 'Ключевская',
+    'Тихое', 'Новомихайловка', 'Усть-Большеземельская', 'Воркута',
+    'Сыктывкар', 'Сысольский', 'Вуктыл', 'Инта', 'Печора', 'Усинск',
+    'Ухта', 'Сосногорск', 'Емва', 'Лесозаводск', 'Коряжма',
+    'Новодвинск', 'Северодвинск', 'Архангельск', 'Котлас', 'Новодвинск',
+    'Шенкурск', 'Вельск', 'Каргополь', 'Белозерск', 'Череповец',
+    'Сокол', 'Бабаево', 'Устюжна', 'Харовск', 'Нюксеница',
+    'Грязовец', 'Белый', 'Осташков', 'Весьегонск', 'Кашин',
+    'Ржев', 'Кимры', 'Торжок', 'Удомля', 'Нелидово',
+    'Бологое', 'Торопец', 'Кувшиново', 'Васильсурск', 'Павлово',
+    'Бор', 'Ветлуга', 'Сергач', 'Лысково', 'Арзамас',
+    'Балахна', 'Кстово', 'Починок', 'Саров', 'Дзержинск',
+    'Выкса', 'Первомайск', 'Урен', 'Варнавино', 'Шахунья',
+    'Володарск', 'Богородск', 'Чкаловск', 'Лукоянов', 'Кулебаки',
+    'Княгинино', 'Семёнов', 'Воротынск', 'Балашиха', 'Железнодорожный',
+    'Люберцы', 'Химки', 'Одинцово', 'Домодедово',
+    'Подольск', 'Раменское', 'Электросталь', 'Ногинск', 'Ступино',
+    'Павловский Посад', 'Фрязино', 'Щёлково', 'Лобня', 'Солнечногорск',
+    'Клин', 'Сергиев Посад', 'Пересвет', 'Краснозаводск',
+    'Краснознаменск', 'Кашира', 'Пущино', 'Протвино', 'Обнинск',
+    'Калуга', 'Малоярославец', 'Боровск', 'Медынь', 'Козельск',
+    'Юхнов', 'Киров', 'Курск', 'Железногорск', 'Льгов', 'Щигры',
+    'Рыльск', 'Обоянь', 'Фатеж', 'Дмитриев', 'Курская АО',
+    'Белгород', 'Старый Оскол', 'Губкин', 'Новый Оскол', 'Шебекино',
+    'Валуйки', 'Короча', 'Ровеньки', 'Новососедово', 'Борисенко',
+    'Борисовка', 'Ворона', 'Ивняки', 'Красная Яруга', 'Красненка',
+    'Красногвардейское', 'Курчатов', 'Нечаево', 'Прохоровка',
+    'Ракитное', 'Ровеньки', 'Старооскольский', 'Томarovka', 'Чернянка',
+    'Шебекино', 'Брянск', 'Унеча', 'Клинцы', 'Сураж', 'Новозыбков',
+    'Дятьково', 'Почеп', 'Карачев', 'Трубчевск', 'Погар',
+    'Фокино', 'Клетня', 'Белая Калитва', 'Каменск-Шахтинский',
+    'Гуково', 'Миллерово', 'Зверево', 'Константиновск', 'Батайск',
+    'Азов', 'Новочеркасск', 'Шахты', 'Гуково', 'Куйбышево',
+    'Волгодонск', 'Цимлянск', 'Семикаракорск', 'Зерноград',
+    'Мясниковский район', 'Красный Сулин', 'Белая Калитва',
+    'Морозовск', 'Сальск', 'Таганрог', 'Егорлыкская', 'Каменоломни',
+    'Крыжневка', 'Кумженская', 'Лучки', 'Миллерово', 'Морозовск',
+    'Новошахтинск', 'Орловский', 'Песчанокопское', 'Родионово-Несветайская',
+    'Семикаракорск', 'Тацинский', 'Усть-Донецкий', 'Целинный',
+    'Шолоховский район', 'Зимовники', 'Каменский район', 'Красносулинский район'
+];
+        
+
+        cityInput.addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            if (query.length >= 2) {
+                const matches = knownCities
+                    .filter(city => city.toLowerCase().includes(query))
+                    .slice(0, 5);
+
+                if (matches.length > 0) {
+                    suggestionsContainer.innerHTML = matches.map(city => `
+                        <div class="suggestion-item" onclick="selectCity('${city}')">
+                            ${city}
+                        </div>
+                    `).join('');
+                    suggestionsContainer.classList.remove('hidden');
+                } else {
+                    suggestionsContainer.classList.add('hidden');
+                }
+            } else {
+                suggestionsContainer.classList.add('hidden');
+            }
+        });
+
+        function selectCity(city) {
+            cityInput.value = city;
+            suggestionsContainer.classList.add('hidden');
+            getWeather();
+        }
+
+        cityInput.addEventListener('keypress', async function(e) {
+            if (e.key === 'Enter') {
+                suggestionsContainer.classList.add('hidden');
+                await getWeather();
+            }
+        });
+
+        async function getWeather() {
+            const city = cityInput.value.trim();
+            weatherInfo.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+
+            if (!city) {
+                errorMessage.textContent = 'Введите название города!';
+                errorMessage.classList.remove('hidden');
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`);
+                
+                if (!response.ok) {
+                    throw new Error('Ошибка при получении данных о погоде');
+                }
+
+                const data = await response.json();
+                
+                // Обновляем данные
+                document.getElementById('cityName').textContent = data.name;
+                document.getElementById('weatherDescription').textContent = data.weather[0].description;
+                document.getElementById('temperature').textContent = `${Math.round(data.main.temp)}°C`;
+                document.getElementById('feelsLike').textContent = `Ощущается как ${Math.round(data.main.feels_like)}°C`;
+                document.getElementById('humidity').textContent = `${data.main.humidity}%`;
+                document.getElementById('windSpeed').textContent = `${Math.round(data.wind.speed)} м/с`;
+                
+                // Форматируем дату
+                const date = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                document.getElementById('weatherDate').textContent = date.toLocaleDateString('ru-RU', options);
+                
+                weatherInfo.classList.remove('hidden');
+            } catch (error) {
+                errorMessage.textContent = 'Не удалось получить данные о погоде. Проверьте название города и подключение к интернету.';
+                errorMessage.classList.remove('hidden');
+            }
+        }
+    </script>
+    
+    <!-- Иконки -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

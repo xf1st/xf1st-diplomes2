@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-black text-white">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tools">
+  <meta name="keywords" content="Tools">
+  <meta name="author" content="xf1st">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="ru">
+  <meta name="revisit-after" content="7 days">
+  <link rel="icon" href="../favicon2.png">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tool.xf1st.ru/">
+  <meta property="og:title" content="Tools">
+  <meta property="og:description" content="Tools">
+  <meta property="og:image" content="https://tool.xf1st.ru/favicon.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://tool.xf1st.ru/">
+  <meta property="twitter:title" content="Tools">
+  <meta property="twitter:description" content="Tools">
+  <meta property="twitter:image" content="https://tool.xf1st.ru/favicon.png">
+  <title>Инструменты</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script> 
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script> 
+
+  <!-- Шрифт -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Стили -->
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .glass-border {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .glass-border:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .shader-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .shader-container canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    .qr-code {
+      transition: opacity 0.3s ease-in-out;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+<!-- Шейдерный фон -->
+<div class="shader-container">
+  <div class="shader-container-inner absolute inset-0"></div>
+</div>
+
+<!-- Контент страницы -->
+<div class="relative z-10 flex items-center justify-center min-h-screen p-4">
+  <div class="w-full max-w-md bg-black/30 backdrop-blur-xl rounded-xl shadow-lg border border-white/20 p-6 space-y-6">
+    <h1 style="text-align: center; font-size: 2rem; font-weight: bold;">Tools</h1>
+    <!-- <a href="bus/index.html" class="glass-border group flex flex-col items-center p-4 w-full rounded-xl transition-all duration-300 transform hover:scale-[1.02]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="hammer" class="lucide lucide-qr-code w-6 h-6 text-white group-hover:text-green-400 transition-colors duration-300"></svg>
+        <h2 class="mt-3 text-lg font-medium text-white font-[Montserrat]">Билеты на автобус</h2>
+    </a> -->
+    <a href="qr.html" class="glass-border group flex flex-col items-center p-4 w-full rounded-xl transition-all duration-300 transform hover:scale-[1.02]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="qr-code" class="lucide lucide-qr-code w-6 h-6 text-white group-hover:text-green-400 transition-colors duration-300"></svg>
+        <h2 class="mt-3 text-lg font-medium text-white font-[Montserrat]">QR-коды</h2>
+    </a>
+    <a href="weather.html" class="glass-border group flex flex-col items-center p-4 w-full rounded-xl transition-all duration-300 transform hover:scale-[1.02]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="cloud-sun" class="lucide lucide-qr-code w-6 h-6 text-white group-hover:text-green-400 transition-colors duration-300"></svg>
+        <h2 class="mt-3 text-lg font-medium text-white font-[Montserrat]">Погода на улице</h2>
+    </a>
+    <a href="randomm.html" class="glass-border group flex flex-col items-center p-4 w-full rounded-xl transition-all duration-300 transform hover:scale-[1.02]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="dices" class="lucide lucide-qr-code w-6 h-6 text-white group-hover:text-green-400 transition-colors duration-300"></svg>
+        <h2 class="mt-3 text-lg font-medium text-white font-[Montserrat]">Рандомайзер</h2>
+    </a>
+    <a href="https://xf1st.ru" class="glass-border group flex flex-col items-center p-4 w-full rounded-xl transition-all duration-300 transform hover:scale-[1.02]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="home" class="lucide lucide-qr-code w-6 h-6 text-white group-hover:text-green-400 transition-colors duration-300"></svg>
+        <h2 class="mt-3 text-lg font-medium text-white font-[Montserrat]">Главная</h2>
+    </a>
+    
+  </div>
+</div>
+
+<!-- QRCode.js библиотека -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<!-- OGL Shader Script -->
+<script type="module">
+  import { Renderer, Program, Mesh, Color, Triangle } from 'https://cdn.skypack.dev/ogl';
+
+  const container = document.querySelector('.shader-container-inner');
+
+  const vertexShader = `
+    attribute vec2 uv;
+    attribute vec2 position;
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = vec4(position, 0, 1);
+    }`;
+
+  const fragmentShader = `
+    precision highp float;
+    uniform float uTime;
+    uniform vec3 uColor;
+    uniform vec3 uResolution;
+    uniform vec2 uMouse;
+    uniform float uAmplitude;
+    uniform float uSpeed;
+    varying vec2 vUv;
+    void main() {
+      float mr = min(uResolution.x, uResolution.y);
+      vec2 uv = (vUv.xy * 2.0 - 1.0) * uResolution.xy / mr;
+      uv += (uMouse - vec2(0.5)) * uAmplitude;
+      float d = -uTime * 0.5 * uSpeed;
+      float a = 0.0;
+      for (float i = 0.0; i < 8.0; ++i) {
+        a += cos(i - d - a * uv.x);
+        d += sin(uv.y * i + a);
+      }
+      d += uTime * 0.5 * uSpeed;
+      vec3 col = vec3(cos(uv * vec2(d, a)) * 0.6 + 0.4, cos(a + d) * 0.5 + 0.5);
+      col = cos(col * cos(vec3(d, a, 2.5)) * 0.5 + 0.5) * uColor;
+      gl_FragColor = vec4(col, 1.0);
+    }`;
+
+  class IridescenceShader {
+    constructor(container, options = {}) {
+      this.container = container;
+      this.color = options.color || [1, 0.8, 0.9];
+      this.speed = options.speed || 1.0;
+      this.amplitude = options.amplitude || 0.15;
+      this.mouseReact = options.mouseReact !== false;
+      this.mousePos = { x: 0.5, y: 0.5 };
+      this.init();
+    }
+
+    init() {
+      this.renderer = new Renderer();
+      this.gl = this.renderer.gl;
+      this.gl.clearColor(0, 0, 0, 1);
+
+      this.setupGeometry();
+      this.setupEventListeners();
+      this.resize();
+      this.animate();
+
+      this.container.appendChild(this.gl.canvas);
+    }
+
+    setupGeometry() {
+      const geometry = new Triangle(this.gl);
+      this.program = new Program(this.gl, {
+        vertex: vertexShader,
+        fragment: fragmentShader,
+        uniforms: {
+          uTime: { value: 0 },
+          uColor: { value: new Color(...this.color) },
+          uResolution: { value: new Color(1, 1, 1) },
+          uMouse: { value: new Float32Array([0.5, 0.5]) },
+          uAmplitude: { value: this.amplitude },
+          uSpeed: { value: this.speed },
+        },
+      });
+      this.mesh = new Mesh(this.gl, { geometry, program: this.program });
+    }
+
+    setupEventListeners() {
+      this.handleResize = this.resize.bind(this);
+      this.handleMouseMove = this.onMouseMove.bind(this);
+      window.addEventListener('resize', this.handleResize);
+      if (this.mouseReact) {
+        this.container.addEventListener('mousemove', this.handleMouseMove);
+      }
+    }
+
+    resize() {
+      const rect = this.container.getBoundingClientRect();
+      this.renderer.setSize(rect.width, rect.height);
+      if (this.program) {
+        this.program.uniforms.uResolution.value = new Color(
+          this.gl.canvas.width,
+          this.gl.canvas.height,
+          this.gl.canvas.width / this.gl.canvas.height
+        );
+      }
+    }
+
+    onMouseMove(e) {
+      const rect = this.container.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = 1.0 - (e.clientY - rect.top) / rect.height;
+      this.mousePos = { x, y };
+      this.program.uniforms.uMouse.value[0] = x;
+      this.program.uniforms.uMouse.value[1] = y;
+    }
+
+    animate(t = 0) {
+      this.animationId = requestAnimationFrame(this.animate.bind(this));
+      this.program.uniforms.uTime.value = t * 0.001;
+      this.renderer.render({ scene: this.mesh });
+    }
+
+    destroy() {
+      if (this.animationId) cancelAnimationFrame(this.animationId);
+      window.removeEventListener('resize', this.handleResize);
+      if (this.mouseReact) {
+        this.container.removeEventListener('mousemove', this.handleMouseMove);
+      }
+      if (this.gl.canvas.parentNode) {
+        this.gl.canvas.parentNode.removeChild(this.gl.canvas);
+      }
+      this.gl.getExtension('WEBGL_lose_context')?.loseContext();
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const containers = document.querySelectorAll('.shader-container-inner');
+    containers.forEach((container, index) => {
+      const colors = [
+        [1, 1, 1],
+        [0.3, 0.8, 1],
+        [0.8, 1, 0.4],
+      ];
+      new IridescenceShader(container, {
+        color: colors[index % colors.length],
+        speed: 0.8 + index * 0.3,
+        amplitude: 0.1 + index * 0.05
+      });
+    });
+  });
+</script>
+
+<!-- Иконки -->
+<script>
+  lucide.createIcons();
+</script>
+
+</body>
+</html>
