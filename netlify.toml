@@ -5,9 +5,42 @@
   status = 200
   force = true
 
-# Правило для поддомена tool.xf1st.ru
+# Поддомен tool.xf1st.ru
 [[redirects]]
   from = "https://tool.xf1st.ru/*" 
   to = "/tool/index.html"
   status = 200
   force = true
+
+# Редиректы для отдельных инструментов
+[[redirects]]
+  from = "https://tool.xf1st.ru/qr" 
+  to = "/tool/qr.html"
+  status = 200
+
+[[redirects]]
+  from = "https://tool.xf1st.ru/weather" 
+  to = "/tool/weather.html"
+  status = 200
+
+[[redirects]]
+  from = "https://tool.xf1st.ru/random" 
+  to = "/tool/randomm.html"
+  status = 200
+
+[[redirects]]
+  from = "https://tool.xf1st.ru/bus" 
+  to = "/tool/bus.html"
+  status = 200
+
+# Если хочешь, чтобы все пути в tool перенаправлялись в /tool
+[[headers]]
+  for = "/tool/*"
+  [headers.values]
+    X-Clacks-Override = "GNU Terry Pratchett"
+
+# Альтернативно: можно указать fallback для SPA
+[[redirects]]
+  from = "/tool/*"
+  to = "/tool/index.html"
+  status = 200
