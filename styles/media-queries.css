@@ -1,0 +1,85 @@
+@media (max-width: 768px) {
+
+    /* Mobile menu button */
+    .mobile-menu-btn {
+        display: block;
+        padding: 10px;
+        cursor: pointer;
+        border: none;
+        background: none;
+        color: white;
+    }
+
+    /* Navigation menu for mobile */
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        transform: translateY(-100%);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    nav.active {
+        transform: translateY(0);
+    }
+
+    nav ul {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    /* Content adjustments */
+    .main-content {
+        padding: 20px;
+    }
+
+    .glass-card {
+        margin: 15px;
+        padding: 20px;
+    }
+
+    /* Form adjustments */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .glass-input {
+        width: 100%;
+        margin: 8px 0;
+    }
+}
+
+/* Specific breakpoints */
+@media (max-width: 480px) {
+    .glass-card {
+        padding: 15px;
+    }
+
+    .custom-toggle {
+        width: 100%;
+        max-width: 150px;
+    }
+
+    .toggle-bg {
+        width: 100%;
+    }
+}
+
+/* Additional mobile-specific styles */
+@media (max-width: 320px) {
+    .glass-card {
+        padding: 10px;
+    }
+
+    .glass-input {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
