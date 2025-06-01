@@ -1,4 +1,6 @@
+# Правило для поддомена donate.xf1st.ru
 [[redirects]]
   from = "https://donate.xf1st.ru/*" 
   to = "/donate/index.html"
   status = 200
+  force = true
