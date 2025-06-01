@@ -4,3 +4,10 @@
   to = "/donate/index.html"
   status = 200
   force = true
+
+# Правило для поддомена tool.xf1st.ru
+[[redirects]]
+  from = "https://tool.xf1st.ru/*" 
+  to = "/tool/index.html"
+  status = 200
+  force = true
