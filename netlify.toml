@@ -1,4 +1,4 @@
 [[redirects]]
-  from = "donate.xf1st.ru/*"
+  from = "https://donate.xf1st.ru/*" 
   to = "/donate/index.html"
   status = 200
