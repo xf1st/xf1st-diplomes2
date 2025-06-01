@@ -8,7 +8,7 @@
 # Поддомен tool.xf1st.ru
 [[redirects]]
   from = "https://tool.xf1st.ru/*" 
-  to = "/tool/index.html"
+  to = "/index.html"
   status = 200
   force = true
 
