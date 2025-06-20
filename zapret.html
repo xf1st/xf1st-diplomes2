@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <title>Zapret - Обход блокировок Discord и YouTube | xf1st</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="Zapret - Plug & Play решение для обхода блокировок Discord и YouTube в Windows. Доступ к заблокированным платформам в один клик.">
+    <meta name="keywords" content="zapret, discord, youtube, обход блокировок, vpn, windows, flowseal, zapret-discord-youtube">
+    <meta name="author" content="Flowseal">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="ru">
+    <meta name="revisit-after" content="7 days">
+    <link rel="icon" href="favicon.ico">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xf1st.ru/zapret.html">
+    <meta property="og:title" content="Zapret - Обход блокировок Discord и YouTube">
+    <meta property="og:description" content="Plug & Play решение для обхода блокировок Discord и YouTube в Windows. Доступ к заблокированным платформам в один клик.">
+    <meta property="og:image" content="https://xf1st.ru/favicon.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://xf1st.ru/zapret.html">
+    <meta property="twitter:title" content="Zapret - Обход блокировок Discord и YouTube">
+    <meta property="twitter:description" content="Plug & Play решение для обхода блокировок Discord и YouTube в Windows. Доступ к заблокированным платформам в один клик.">
+    <meta property="twitter:image" content="https://xf1st.ru/favicon.png">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Serif:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+    body, html {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #000;
+      scroll-behavior: smooth;
+    }
+    
+    main div h1 {
+      margin-top: 1rem;
+    }
+    
+    .shader-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    
+    .shader-bg canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+    
+    .iridescent-glow {
+      pointer-events: none;
+      filter: blur(48px) saturate(1.4) brightness(1.1);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 900px;
+      height: 400px;
+      transform: translate(-50%, -52%);
+      opacity: 0.55;
+      background: conic-gradient(from 160deg, #a5eafc, #f1a1e8, #e0ffb1, #a5eafc 100%);
+      z-index: 1;
+      border-radius: 60% 40% 70% 30% / 40% 60% 30% 70%;
+      animation: iridescentMove 12s linear infinite alternate;
+    }
+    
+    @keyframes iridescentMove {
+      0% { filter: blur(48px) saturate(1.2); opacity: 0.5; transform: translate(-50%,-52%) scale(1);}
+      100% { filter: blur(60px) saturate(1.7); opacity: 0.65; transform: translate(-50%,-53%) scale(1.08);}
+    }
+    
+    .glass-border {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.02);
+    }
+    
+    .glass-card {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .glass-card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      white-space: nowrap;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(124, 58, 237, 0.9));
+      color: white;
+      box-shadow: 0 4px 14px 0 rgba(124, 58, 237, 0.3);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px 0 rgba(124, 58, 237, 0.4);
+      background: linear-gradient(135deg, rgba(139, 92, 246, 1), rgba(124, 58, 237, 1));
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      transition: all 0.2s ease;
+    }
+    
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+    
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 0;
+      line-height: 1.2;
+      font-weight: 700;
+      color: white;
+    }
+    
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(to right, #a78bfa, #f472b6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: white;
+    }
+    
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    
+    p {
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.6;
+      font-size: 1.1rem;
+    }
+    
+    a {
+      color: #a78bfa;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    a:hover {
+      color: #c4b5fd;
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate-fade-in {
+      opacity: 0;
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+    
+    /* Utility classes */
+    .text-center { text-align: center; }
+    .mt-6 { margin-top: 1.5rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .max-w-3xl { max-width: 48rem; }
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .gap-4 { gap: 1rem; }
+    .gap-6 { gap: 1.5rem; }
+    .p-8 { padding: 2rem; }
+    .prose { max-width: 65ch; }
+    .prose-invert { color: rgba(255, 255, 255, 0.8); }
+    .prose-invert h1,
+    .prose-invert h2,
+    .prose-invert h3,
+    .prose-invert h4,
+    .prose-invert h5,
+    .prose-invert h6 {
+      color: white;
+    }
+    
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    
+    /* Responsive */
+    @media (min-width: 769px) {
+      .btn {
+        padding: 0.6rem 1.25rem;
+        font-size: 0.95rem;
+        width: auto;
+        margin: 0;
+      }
+      
+      .btn-primary {
+        min-width: 220px;
+      }
+      
+      .btn-outline {
+        min-width: 180px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      h1 { 
+        font-size: 2.25rem;
+        line-height: 1.2;
+      }
+      h2 { 
+        font-size: 1.75rem;
+        line-height: 1.25;
+      }
+      h3 { 
+        font-size: 1.25rem;
+        line-height: 1.3;
+      }
+      
+      .glass-card { 
+        padding: 1.25rem;
+        margin: 0 -0.75rem;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+      }
+      
+      main {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+      }
+      
+      .prose {
+        max-width: 100%;
+        padding: 0 0.5rem;
+      }
+      
+      .btn-group {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+      }
+      
+      .btn {
+        padding: 0.85rem 1.5rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+  </head>
+  <body class="bg-black text-gray-100 font-sans antialiased relative min-h-screen bg-black overflow-x-hidden">
+    <!-- Iridescent Shader Canvas -->
+    <div class="shader-bg absolute inset-0"></div>
+    <!-- Soft iridescent light overlay -->
+    <div class="iridescent-glow"></div>
+    
+    <main class="relative z-10 pt-24 pb-16 px-6 max-w-6xl mx-auto">
+      <div class="glass-card p-8 rounded-2xl">
+        <div class="flex flex-col items-center text-center mb-8">
+          <h1 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Zapret</h1>
+          <p class="text-xl text-gray-300 max-w-2xl">Plug & Play решение для обхода блокировок Discord и YouTube в Windows</p>
+        </div>
+        
+        <div class="flex flex-col sm:flex-row justify-center gap-4 w-full mb-12 px-4 sm:px-0">
+          <a href="https://github.com/Flowseal/zapret-discord-youtube/releases/" target="_blank" class="btn btn-primary flex-1 sm:flex-none" style="min-width: 240px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+              <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+              <path d="M9 18c-4.51 2-5-2-7-2"></path>
+            </svg>
+            Скачать последнюю версию
+          </a>
+          <a href="https://github.com/Flowseal/zapret-discord-youtube" target="_blank" class="btn btn-outline flex-1 sm:flex-none" style="min-width: 240px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+              <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
+              <path d="M9 18c-4.51 2-5-2-7-2"></path>
+            </svg>
+            Исходный код
+          </a>
+        </div>
+        
+        <div class="prose prose-invert max-w-2xl mx-auto">
+          <h2 class="text-2xl font-bold mb-4">О проекте</h2>
+          <p class="mb-6">Zapret — это простое и эффективное решение для обхода блокировок популярных платформ, таких как Discord и YouTube, в операционной системе Windows. Приложение работает по принципу "установил и забыл" — никаких сложных настроек не требуется.</p>
+          
+          <h3 class="text-xl font-semibold mb-3">Как это работает?</h3>
+          <p class="mb-6">Zapret автоматически перенаправляет трафик через защищённые серверы, позволяя получить доступ к заблокированным ресурсам. При этом скорость соединения остаётся на высоком уровне.</p>
+          
+          <h3 class="text-xl font-semibold mb-3">Безопасность</h3>
+          <p class="mb-6">Zapret не требует дополнительных разрешений и не собирает никаких пользовательских данных. Весь код проекта открыт и доступен для проверки.</p>
+          
+          <h3 class="text-xl font-semibold mb-3">Как скачать</h3>
+          <p class="mb-6">Скачать последнюю версию можно на <a href="https://github.com/Flowseal/zapret-discord-youtube/releases/" target="_blank" class="text-gray-300 hover:text-white transition-colors">GitHub</a> при нажатии на ссылку "zapret-discord-youtube-1.8.1.zip" например, распокавать и запустить файл "general.bat" или другие...</p>
+          
+          <div class="mt-12 flex justify-center">
+            <a href="https://github.com/Flowseal/zapret-discord-youtube/releases/" class="btn btn-primary w-full sm:w-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Скачать последнюю версию
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="relative z-10 py-8 text-center text-gray-400 text-sm">
+      <div class="container mx-auto px-6">
+        <p>© 2025 xf1st. Права не защищены. Контент не мой, я делаю его для подруги а не для общего распостронения и не призываю людей к незаконной деятельности.</p>
+      </div>
+    </footer>
+
+    
+    <!-- JavaScript -->
+    <script type="module">
+      import { Renderer, Program, Mesh, Color, Triangle } from 'https://cdn.skypack.dev/ogl';
+      
+      // Initialize WebGL shader background
+      const vertexShader = `
+        attribute vec2 uv;
+        attribute vec2 position;
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = vec4(1.0 - 2.0 * position, 0, 1);
+        }
+      `;
+
+      const fragmentShader = `
+        precision highp float;
+        uniform float uTime;
+        uniform vec2 uResolution;
+        varying vec2 vUv;
+        
+        #define PI 3.14159265359
+        #define TWO_PI 6.28318530718
+        
+        // Gradient noise function (simplex noise)
+        float random (vec2 st) {
+          return fract(sin(dot(st.xy, vec2(12.9898,78.233)))*43758.5453123);
+        }
+        
+        float noise (vec2 st) {
+          vec2 i = floor(st);
+          vec2 f = fract(st);
+          
+          // Four corners in 2D of a tile
+          float a = random(i);
+          float b = random(i + vec2(1.0, 0.0));
+          float c = random(i + vec2(0.0, 1.0));
+          float d = random(i + vec2(1.0, 1.0));
+          
+          // Smooth Interpolation
+          vec2 u = f*f*(3.0-2.0*f);
+          
+          // Mix 4 coorners percentages
+          return mix(a, b, u.x) + 
+                  (c - a)* u.y * (1.0 - u.x) + 
+                  (d - b) * u.x * u.y;
+        }
+        
+        // Color palette
+        vec3 palette(float t) {
+          vec3 a = vec3(0.5, 0.5, 0.5);
+          vec3 b = vec3(0.5, 0.5, 0.5);
+          vec3 c = vec3(1.0, 1.0, 1.0);
+          vec3 d = vec3(0.263, 0.416, 0.557);
+          
+          return a + b*cos(6.28318*(c*t+d));
+        }
+        
+        void main() {
+          // Normalized pixel coordinates (from 0 to 1)
+          vec2 uv = vUv * 2.0 - 1.0;
+          
+          // Time varying pixel color
+          vec3 col = vec3(0.0);
+          
+          // Add some noise
+          float n = noise(uv * 3.0 + uTime * 0.1);
+          
+          // Create a gradient based on distance from center
+          float d = length(uv);
+          col = palette(d * 2.0 + uTime * 0.1 + n * 0.5);
+          
+          // Vignette
+          col *= 1.0 - 0.5 * pow(length(uv), 2.0);
+          
+          // Output to screen
+          gl_FragColor = vec4(col, 0.15);
+        }
+      `;
+
+      // Initialize WebGL
+      const canvas = document.querySelector('.shader-bg');
+      const renderer = new Renderer({
+        canvas,
+        width: canvas.clientWidth,
+        height: canvas.clientHeight,
+        dpr: Math.min(window.devicePixelRatio, 2),
+        alpha: true,
+      });
+      
+      const gl = renderer.gl;
+      gl.clearColor(0, 0, 0, 0);
+      
+      // Create geometry
+      const geometry = new Triangle(gl);
+      
+      // Create program
+      const program = new Program(gl, {
+        vertex: vertexShader,
+        fragment: fragmentShader,
+        uniforms: {
+          uTime: { value: 0 },
+          uResolution: { value: [window.innerWidth, window.innerHeight] },
+        },
+        transparent: true,
+        depthTest: false,
+      });
+      
+      // Create mesh
+      const mesh = new Mesh(gl, { geometry, program });
+      
+      // Handle resize
+      function onResize() {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        program.uniforms.uResolution.value = [window.innerWidth, window.innerHeight];
+      }
+      
+      window.addEventListener('resize', onResize, false);
+      onResize();
+      
+      // Animation loop
+      let time = 0;
+      function animate() {
+        requestAnimationFrame(animate);
+        time += 0.01;
+        program.uniforms.uTime.value = time;
+        renderer.render({ scene: mesh });
+      }
+      
+      animate();
+      
+      // Add smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+      
+      // Add animation on scroll
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in');
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+      
+      document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+        observer.observe(el);
+      });
+    </script>
+  </body>
+</html>
